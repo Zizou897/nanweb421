@@ -7,54 +7,77 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Contact',
+            name="Contact",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nom', models.CharField(max_length=250)),
-                ('email', models.EmailField(max_length=254)),
-                ('message', models.TextField()),
-                ('date_add', models.DateTimeField(auto_now_add=True)),
-                ('date_update', models.DateTimeField(auto_now=True)),
-                ('status', models.BooleanField(default=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("nom", models.CharField(max_length=250)),
+                ("email", models.EmailField(max_length=254)),
+                ("message", models.TextField()),
+                ("date_add", models.DateTimeField(auto_now_add=True)),
+                ("date_update", models.DateTimeField(auto_now=True)),
+                ("status", models.BooleanField(default=True)),
             ],
             options={
-                'verbose_name': 'Contact',
-                'verbose_name_plural': 'Contacts',
+                "verbose_name": "Contact",
+                "verbose_name_plural": "Contacts",
             },
         ),
         migrations.CreateModel(
-            name='Newsletter',
+            name="Newsletter",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('email', models.EmailField(max_length=254)),
-                ('date_add', models.DateTimeField(auto_now_add=True)),
-                ('date_update', models.DateTimeField(auto_now=True)),
-                ('status', models.BooleanField(default=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("email", models.EmailField(max_length=254)),
+                ("date_add", models.DateTimeField(auto_now_add=True)),
+                ("date_update", models.DateTimeField(auto_now=True)),
+                ("status", models.BooleanField(default=True)),
             ],
             options={
-                'verbose_name': 'Newsletter',
-                'verbose_name_plural': 'Newsletters',
+                "verbose_name": "Newsletter",
+                "verbose_name_plural": "Newsletters",
             },
         ),
         migrations.CreateModel(
-            name='Team',
+            name="Team",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nom', models.CharField(max_length=250)),
-                ('prenom', models.CharField(max_length=250)),
-                ('image', models.FileField(upload_to='image_blog')),
-                ('date_add', models.DateTimeField(auto_now_add=True)),
-                ('date_update', models.DateTimeField(auto_now=True)),
-                ('status', models.BooleanField(default=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("nom", models.CharField(max_length=250)),
+                ("prenom", models.CharField(max_length=250)),
+                ("image", models.FileField(upload_to="image_blog")),
+                ("date_add", models.DateTimeField(auto_now_add=True)),
+                ("date_update", models.DateTimeField(auto_now=True)),
+                ("status", models.BooleanField(default=True)),
             ],
             options={
-                'verbose_name': 'Contact',
-                'verbose_name_plural': 'Contacts',
+                "verbose_name": "Contact",
+                "verbose_name_plural": "Contacts",
             },
         ),
     ]

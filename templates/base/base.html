@@ -58,7 +58,7 @@
                                 <div class="collapse navbar-collapse" id="gazetteMenu">
                                     <ul class="navbar-nav mr-auto">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="{% url 'index' %}">Today <span class="sr-only">(current)</span></a>
+                                            <a class="nav-link" href="{% url 'index' %}">Accueil <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{% url 'catagory' %}">Politics</a>
@@ -245,6 +245,151 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         <!-- Google Maps js -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk9KNSL1jTv4MY9Pza6w8DJkpI_nHyCnk"></script>
     <script src="{% static 'assets/js/map-active.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script>
+      new Vue(
+        {
+          el:'#contact',
+          data:{
+            name:'',
+            email:'',
+            message:'',
+            url:"{% url 'checkup' %}"
+          },
+          methods:{
+            postData(){
+              if (this.name === '' || this.email === '' || this.message === ''){
+                swal.fire({
+                  icon:'error',
+                  text:'Veuillez remplir les champs vides',
+                  showConfirmButton:false,
+                  timer:2000,
+                })
+              }
+              else if (!/[A-Za-z'éèöïäëû ]+/.test(this.name)){
+                swal.fire({
+                  icon:'error',
+                  text:'Veuillez saisir un nom valide',
+                  showConfirmButton:false,
+                  timer:2000,
+                })
+              }
+              else if (!/(\w\.?)+@(\w\.?)+\.[A-Za-z]{2,3}/.test(this.email)){
+                swal.fire({
+                  icon:'error',
+                  text:'Veuillez saisir un email valide',
+                  showConfirmButton:false,
+                  timer:2000,
+                })
+              }
+              else{
+                axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+                axios.defaults.xsrfCookieName = 'csrftoken'
+                
+                let form = new FormData()
+
+                form.append('name', this.name)
+                form.append('email', this.email)
+                form.append('message', this.message)
+                
+                axios.post(this.url, form).then((response) => {
+                  if (response.data.success){
+                    swal.fire({
+                      icon:'success',
+                      text:response.data.text,
+                      showConfirmButton:false,
+                      timer:2000,
+                    })
+                    this.name = ""
+                    this.email = ""
+                    this.message =""
+                  }
+                  else {
+                    swal.fire({
+                      icon:'error',
+                      text:response.data.text,
+                      showConfirmButton:false,
+                      timer:2000,
+                    })
+                  }
+                }).catch((e) => {
+                  console.log(e)
+                })
+                
+              }
+            }
+          },
+          delimiters: ['%{', '}']
+        }
+      )
+
+    new Vue({
+        el: '#form',
+        data:{
+            email: ''
+        },
+        delimiters:['%{', '}'],
+        methods:{
+            registersEmail(){
+                if(!this.email){
+                    swal.fire({
+                        icon:'error',
+                        text: 'veuillez remplir ce champ avant de le soumettre !!!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
+                else if (!/(\w\.?)+@(\w\.?)+\.[A-Za-z]{2,3}/.test(this.email)){
+                    swal.fire({
+                        icon: 'error',
+                        text: 'Email invalide',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
+                else{
+
+                    let form = new FormData()
+                    form.append('email', JSON.stringify(this.email))
+
+                    axios.defaults.xsrfCookieName = 'XSRF-TOKEN'
+                    axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN'
+                    axios.post("{% url 'registerEmail' %}", form)
+                    .then((response) =>{
+                        if(response.data.success){
+                            swal.fire({
+                                icon:'success',
+                                text: response.data.msg,
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                            this.email = ""
+                        }
+                        else{
+                            swal.fire({
+                                icon:'error',
+                                text: response.data.msg,
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                        }
+                    })
+                    .catch((e) => {
+                        console.log(e)
+                    })
+                }
+            }
+        }
+
+    })
+
+
+    </script>
+
 
 </body>
 

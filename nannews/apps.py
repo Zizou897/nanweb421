@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class NannewsConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'nannews'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "nannews"

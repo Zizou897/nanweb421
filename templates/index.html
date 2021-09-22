@@ -233,10 +233,11 @@
                             <div class="widget-title">
                                 <h5>subscribe</h5>
                             </div>
-                            <div class="subscribe-form">
+                            <div id="form" class="subscribe-form">
                                 <form action="#">
-                                    <input type="email" name="email" id="subs_email" placeholder="Your Email">
-                                    <button type="submit">subscribe</button>
+                                {% csrf_token %}
+                                    <input type="email" v-model="email" name="email" id="subs_email" placeholder="Your Email">
+                                    <button @click.prevent="registersEmail" type="submit">subscribe</button>
                                 </form>
                             </div>
                         </div>
