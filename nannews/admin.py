@@ -9,6 +9,8 @@ from . import models
 class ContactAdmin(admin.ModelAdmin):
     list_display = ("nom", "email", "date_add", "status")
     date_hierarchy = "date_add" 
+    list_editable = ["status"]
+
 
 @admin.register(models.Team)
 class TeamAdmin(admin.ModelAdmin):
@@ -18,17 +20,21 @@ class TeamAdmin(admin.ModelAdmin):
     list_editable = ["status"]
 
     def image_view(self, obj):
-        return mark_safe(f'<img src="{obj.image}" style="height:100px; width:150px">')
-
+        return mark_safe(f'<img src="{obj.image.url}" style="height:100px; width:150px">')
     image_view.short_description = "Aperçu des images"
 
 
 @admin.register(models.Site)
 class SiteAdmin(admin.ModelAdmin):
-    list_display = ("nom_site", "phone", "address", "date_add", "status")
+    list_display = ("nom_site","image_view", "phone", "address", "date_add", "status")
     date_hierarchy = "date_add"
     list_per_page = 10
     list_editable = ["status"]
+
+    def image_view(self, obj):
+        return mark_safe(f'<img src="{obj.image.url}" style="height:100px; width:150px">')
+    image_view.short_description = "Aperçu des images"
+
 
 
 @admin.register(models.Phone)
@@ -43,6 +49,16 @@ class PhoneAdmin(admin.ModelAdmin):
 @admin.register(models.Social)
 class SocialAdmin(admin.ModelAdmin):
     list_display = ("nom", "link", "date_add", "status")
+    date_hierarchy = "date_add"
+    list_per_page = 10
+    list_editable = ["status"]
+
+
+
+
+@admin.register(models.Config)
+class ConfigAdmin(admin.ModelAdmin):
+    list_display = ("nom_history", "titre_description", "date_add", "status")
     date_hierarchy = "date_add"
     list_per_page = 10
     list_editable = ["status"]

@@ -12,21 +12,35 @@ def index(request):
 
 
 def catagory(request):
+    site_web = models.Site.objects.filter(status=True).first()
     return render(request, "catagory.html", locals())
 
 
 def about(request):
-
+    site_web = models.Site.objects.filter(status=True).first()
+    teams = models.Team.objects.filter(status = True)
+    configuration = models.Config.objects.filter(status=True).first(    )
     return render(request, "about-us.html", locals())
 
 
 def contact(request):
+    site_web = models.Site.objects.filter(status=True).first()
     return render(request, "contact.html", locals())
 
 
 def detail(request):
+    site_web = models.Site.objects.filter(status=True).first()
     return render(request, "single-post.html", locals())
 
+
+
+
+def is_email(email):
+    try:
+        validate_email(email)
+        return True
+    except:
+        return False
 
 
 
@@ -43,7 +57,7 @@ def checkup(request):
         if email.isspace() or email == '' or name.isspace() or name == '' or message.isspace() or message == '':
             success = False
             text = 'Veuillez remplir les champs vides'
-        elif not re.fullmatch('(\w\.?)+@(\w\.?)+\.[A-Za-z]{2,3}', email):
+        elif is_email(email):
             success = False
             text = 'Veuillez saisir un email valide'
         elif not re.fullmatch("[A-Za-z'éèëöüïäû ]+", name):
@@ -64,14 +78,6 @@ def checkup(request):
 
     return JsonResponse(datas, safe=False)
 
-
-
-def is_email(email):
-    try:
-        validate_email(email)
-        return True
-    except:
-        return False
 
 
     

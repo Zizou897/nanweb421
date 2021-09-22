@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models.fields.related import ForeignKey
+from tinymce.models import HTMLField
 
 # Create your models here.
 
@@ -37,7 +37,7 @@ class Newsletter(models.Model):
 class Team(models.Model):
     nom = models.CharField( max_length=250)
     prenom = models.CharField(max_length=250)
-    models.FileField( upload_to="image_team")
+    image = models.FileField( upload_to="image_team")
     job = models.CharField(max_length=150)
     social = models.ForeignKey("nannews.Social",related_name="team_social", on_delete=models.CASCADE)
     date_add = models.DateTimeField(auto_now_add=True)
@@ -56,6 +56,7 @@ class Site(models.Model):
     nom_site = models.CharField(max_length=250)
     phone = models.ForeignKey("nannews.Phone", related_name="site_phone", on_delete=models.CASCADE)
     address = models.CharField(max_length=250)
+    image = models.FileField(upload_to="image_site")
     copy_ryght = models.CharField(max_length=250)
     date_add = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)
@@ -93,3 +94,22 @@ class Social(models.Model):
 	
 	def __str__(self):
 		return self.nom
+
+
+
+class Config(models.Model):
+    nom_history = models.CharField(max_length=150)
+    history = models.TextField()
+    titre_description = models.CharField(max_length=250)
+    description = models.TextField()
+    date_add = models.DateTimeField(auto_now_add=True)
+    date_update = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=True)
+
+
+    class Meta:
+        verbose_name = "Configuration"
+        verbose_name_plural  = "Configurations"
+    
+    def __str__(self):
+        return self.nom_history
