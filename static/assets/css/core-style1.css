@@ -274,7 +274,7 @@ img {
 }
 
 #scrollUp {
-    background-color: #ff084e;
+    background-color: #858BE9;
     border-radius: 0;
     bottom: 0;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
@@ -349,8 +349,8 @@ img {
 .gazette-btn:hover,
 .gazette-btn:focus {
     font-weight: 400;
-    border: 2px solid #ff0303;
-    color: #ff0303;
+    border: 2px solid #858BE9;
+    color: #858BE9;
 }
 
 /* :: 4.0 Header Area CSS */
@@ -490,9 +490,13 @@ img {
 /* :: 4.3.0 Bottom Header Area CSS */
 
 .bottom-header {
+    position: sticky;
+    top: 0;
     width: 100%;
     height: 55px;
     border-top: 1px solid #e4e4e4;
+    background-color: white;
+    z-index: 10;
 }
 
 .main-menu .navbar.navbar-expand-lg {
@@ -506,7 +510,7 @@ img {
 
 .main-menu .navbar.navbar-expand-lg .nav-item.active .nav-link,
 .main-menu .navbar.navbar-expand-lg .nav-link:hover {
-    color: #ff0303;
+    color: #858BE9;
 }
 
 .main-menu .dropdown-menu.show {
@@ -570,7 +574,7 @@ img {
 
 .single-blog-post-slide .tags > a {
     color: #fff;
-    background-color: #ff0303;
+    background-color: #858BE9;
     padding: 2px 5px;
     font-size: 12px;
     text-transform: uppercase;
@@ -594,7 +598,7 @@ img {
 
 .single-blog-post-slide h3 a:hover,
 .single-blog-post-slide .date a:hover {
-    color: #ff0303;
+    color: #858BE9;
 }
 
 /* :: 6.0 News Marquee Area CSS */
@@ -804,7 +808,7 @@ img {
 .gazette-post-tag a {
     font-size: 14px;
     font-weight: 700;
-    background-color: #ff0303;
+    background-color: #858BE9;
     color: #fff;
     text-transform: uppercase;
     padding: 5px 10px;
@@ -845,8 +849,8 @@ img {
 }
 
 .post-continue-btn a:hover {
-    border: 1px solid #ff0303;
-    color: #ff0303;
+    border: 1px solid #858BE9;
+    color: #858BE9;
 }
 
 .post-continue-btn a i {
