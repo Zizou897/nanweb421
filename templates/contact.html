@@ -52,9 +52,9 @@
                         <h4 class="font-bold">Phone</h4>
                     </div>
                     <div class="contact-address-info">
-                         {% for phone in site_web.site_phone %}
-                            {{ phone }}
-                        <p>Phone #1: 126-632-2345 <br>Phone #2: 126-632-2345 <br>Phone #3: 126-632-2345 <br>Phone #4: 126-632-2345</p>
+                        {% for phone in site_web.phone.all %}
+                            {{ phone.telephone }}
+                        <!-- <p>Phone #1: 126-632-2345 <br>Phone #2: 126-632-2345 <br>Phone #3: 126-632-2345 <br>Phone #4: 126-632-2345</p> -->
                         {% endfor %}
                     </div>
                 </div>
