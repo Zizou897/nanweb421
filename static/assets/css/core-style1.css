@@ -628,7 +628,7 @@ img {
 }
 
 .marquee-content-items li {
-    background-color: #858BE9;
+    background-color: #101010;
     padding: 0 20px;
     height: 65px;
     display: -webkit-box;
@@ -640,12 +640,12 @@ img {
 }
 
 .marquee-content-items li:nth-child(even) {
-    background-color: white;
+    background-color: #1c1c1c;
     
 }
 
 .marquee-content-items li:nth-child(even) a {
-    color: #858BE9;
+    color: white;
 }
 
 .marquee-content-items li a {
@@ -654,7 +654,7 @@ img {
     display: inline-block;
 }
 .marquee-content-items li:nth-child(even) a > span {
-    background-color: white;
+    background-color: #858BE9;
 
 }
 
@@ -663,6 +663,8 @@ img {
     font-size: 14px;
     font-weight: 300;
     margin-right: 20px;
+    background-color: #858BE9;
+
 }
 
 /* :: 7.0 Sidebar Area CSS */
