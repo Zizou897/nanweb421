@@ -57,12 +57,12 @@
                             <nav class="navbar navbar-expand-lg">
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gazetteMenu" aria-controls="gazetteMenu" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i> Menu</button>
                                 <div class="collapse navbar-collapse" id="gazetteMenu">
-                                    <ul class="navbar-nav mr-auto">
+                                    <ul id="dynamique" class="navbar-nav mr-auto">
                                         <li class="nav-item active">
                                             <a class="nav-link" href="{% url 'index' %}">Accueil <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{% url 'catagory' %}">Politics</a>
+                                            <a class="nav-link" href="{% url 'catagory' %}"> %{categorie_return}</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{% url 'catagory' %}">Lifestyle</a>
@@ -396,6 +396,28 @@
 
     })
     </script>
+
+    <!-- <script>
+        new Vue({
+            el: "#dynamique",
+            data(){
+                return{
+                    categorie_return: null
+                }
+            },
+            delimiters: [ '%{', '}'],
+            methods(){
+                axios
+                    .get("https://nannews.herokuapp.com/api/category/")
+                    .then((response)=> this.categorie_return = response)
+                    .catch(error => console.log(error))
+            },
+            computed: {
+             
+            }
+
+        })
+    </script> -->
 
 </body>
 
