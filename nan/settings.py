@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-rsevqur2iyzkxdo5+^84^1-jf+!6i)=%z3=3mh8b*zqokgtj*&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://nanweb.herokuapp.com/"]
+ALLOWED_HOSTS = ["https://nanweb.herokuapp.com/", '*']
 
 
 # Application definition
@@ -81,24 +81,24 @@ WSGI_APPLICATION = 'nan.wsgi.application'
 # postgres://(user)crzixuboovaeyu:(password)2e4ab2d4968fb11366616b027ae7edc16e32df2920078649bbf7b0cd34810e61@(host)ec2-52-23-87-65.compute-1.amazonaws.com:(port)5432/(name)d7cho6s2kn8lpe
 
 # configuration database postgresql
-# DATABASES = {
-# 	'default': {
-# 		'ENGINE': 'django.db.backends.postgresql',
-# 		'NAME': 'd7cho6s2kn8lpe',
-# 		'USER': 'crzixuboovaeyu',
-# 		'PASSWORD': '2e4ab2d4968fb11366616b027ae7edc16e32df2920078649bbf7b0cd34810e61',
-# 		'HOST': 'ec2-52-23-87-65.compute-1.amazonaws.com',
-# 		'PORT': 5432,
-# 	}
-# }
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql',
+		'NAME': 'd7cho6s2kn8lpe',
+		'USER': 'crzixuboovaeyu',
+		'PASSWORD': '2e4ab2d4968fb11366616b027ae7edc16e32df2920078649bbf7b0cd34810e61',
+		'HOST': 'ec2-52-23-87-65.compute-1.amazonaws.com',
+		'PORT': 5432,
+	}
+}
 
 # configuration database sqlite3
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
