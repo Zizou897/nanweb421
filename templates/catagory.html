@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 
     <!-- Breadcumb Area Start -->
@@ -12,7 +13,9 @@
                         <div class="gazette-post-tag">
                             <a href="{% url 'catagory' %}">politics</a>
                         </div>
-                        <p class="editorial-post-date text-dark mb-0">March 29, 2016</p>
+                        {% language 'fr' %}
+                            <p class="editorial-post-date text-dark mb-0">{% now "j F Y" %}</p>
+                        {% endlanguage %}
                     </div>
                 </div>
             </div>

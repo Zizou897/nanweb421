@@ -513,6 +513,18 @@ img {
     color: #858BE9;
 }
 
+
+
+
+.personal {
+ outline: none;
+ border: none;
+ border-radius: 5px;
+ background-color: #858BE9;
+ color: white!important;
+ margin-left: 10px;
+}
+
 .main-menu .dropdown-menu.show {
     border: none;
     box-shadow: 2px 5px 30px rgba(0, 0, 0, 0.15);
