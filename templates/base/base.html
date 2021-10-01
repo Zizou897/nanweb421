@@ -395,9 +395,11 @@
         }
 
     })
+
+
     </script>
 
-    <!-- <script>
+    <script>
         new Vue({
             el: "#dynamique",
             data(){
@@ -407,17 +409,23 @@
             },
             delimiters: [ '%{', '}'],
             methods(){
-                axios
-                    .get("https://nannews.herokuapp.com/api/category/")
-                    .then((response)=> this.categorie_return = response)
-                    .catch(error => console.log(error))
+                axios.get('https://nannews.herokuapp.com/api/category/',{
+                    headers:{
+                        'xsrfHeaderName': 'X-CSRFToken',
+                        'xsrfCookieName': 'csrftoken'
+                    }
+                })
+                .then(response =>{
+                    (this.info = response.data);
+                })
+                .catch(error => console.log(error))
             },
             computed: {
              
             }
 
         })
-    </script> -->
+    </script>
 
 </body>
 

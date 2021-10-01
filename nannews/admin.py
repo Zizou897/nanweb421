@@ -26,7 +26,7 @@ class TeamAdmin(admin.ModelAdmin):
 
 @admin.register(models.Site)
 class SiteAdmin(admin.ModelAdmin):
-    list_display = ("nom_site","image_view", "phone", "address", "date_add", "status")
+    list_display = ("nom_site","image_view","address", "date_add", "status")
     date_hierarchy = "date_add"
     list_per_page = 10
     list_editable = ["status"]
@@ -48,13 +48,17 @@ class PhoneAdmin(admin.ModelAdmin):
 
 @admin.register(models.Social)
 class SocialAdmin(admin.ModelAdmin):
-    list_display = ("nom", "link", "date_add", "status")
+    list_display = ("nom", "date_add", "status")
     date_hierarchy = "date_add"
     list_per_page = 10
     list_editable = ["status"]
 
-
-
+@admin.register(models.SocialUser)
+class SocialUserAdmin(admin.ModelAdmin):
+    list_display = ("link", "social", "team", "date_add", "status")
+    date_hierarchy = "date_add"
+    list_per_page = 10
+    list_editable = ["status"]
 
 @admin.register(models.Config)
 class ConfigAdmin(admin.ModelAdmin):

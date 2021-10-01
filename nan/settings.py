@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-rsevqur2iyzkxdo5+^84^1-jf+!6i)=%z3=3mh8b*zqokgtj*&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://nanweb.herokuapp.com/", '*']
+ALLOWED_HOSTS = ["https://nanweb.herokuapp.com/",'*']
 
 
 # Application definition
@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'nannews.apps.NannewsConfig',
-    'tinymce'
+    'tinymce',
+    'corsheaders'
 
 ]
 
@@ -48,11 +49,13 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_brotli.middleware.BrotliMiddleware',
 ]
 
 ROOT_URLCONF = 'nan.urls'
@@ -76,9 +79,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'nan.wsgi.application'
 
 
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-# postgres://(user)crzixuboovaeyu:(password)2e4ab2d4968fb11366616b027ae7edc16e32df2920078649bbf7b0cd34810e61@(host)ec2-52-23-87-65.compute-1.amazonaws.com:(port)5432/(name)d7cho6s2kn8lpe
+# postgres://(user)crzixuboovaeyu:(password)2e4ab2d4968fb11366616b027ae7edc16e32df2920078649bbf7b0cd34810e61@(host)ec2-52-23-87-65.compute-1.amazonaws.com:(name)5432/d7cho6s2kn8lpe
 
 # configuration database postgresql
 DATABASES = {
