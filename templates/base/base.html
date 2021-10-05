@@ -395,29 +395,51 @@
         }
 
     })
+
+
     </script>
 
-    <!-- <script>
+    <script>
         new Vue({
             el: "#dynamique",
             data(){
                 return{
-                    categorie_return: null
-                }
+                    categorie_return: [],
+                    artice: []
+                    }
             },
             delimiters: [ '%{', '}'],
             methods(){
-                axios
-                    .get("https://nannews.herokuapp.com/api/category/")
-                    .then((response)=> this.categorie_return = response)
-                    .catch(error => console.log(error))
-            },
-            computed: {
-             
+                axios.post("http://nannews.herokuapp.com/graphql", {
+                query: `
+                    {
+                    category{
+                        id
+                        name
+                    }
+                    recentArticles{
+                        id
+                        title
+                        description
+                        category{
+                            id
+                            name
+                        }
+                    }
+                }`
+                }, 
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+                ).then((response)=>{
+                    console.log(response)
+                    this.article = response.data.data?.recentArticles
+                })
             }
-
         })
-    </script> -->
+    </script>
 
 </body>
 

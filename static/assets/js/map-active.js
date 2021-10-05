@@ -19,7 +19,7 @@ var mapOptions = {
 };
 map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
 var geocoder_map = new google.maps.Geocoder();
-var address = 'Riga';
+var address = 'Ecole NaN, Abidjan';
 geocoder_map.geocode({
     'address': address
 }, function (results, status) {

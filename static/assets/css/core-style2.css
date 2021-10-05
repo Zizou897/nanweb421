@@ -1272,9 +1272,9 @@ textarea.form-control {
     margin-bottom: 0;
 }
 
-#googleMap {
-    width: 100%;
-    height: 560px;
+#googleMap, #googleMap2 {
+    width: 100% !important;
+    height: 560px !important;
 }
 
 /* :: 14.0 Footer Area CSS */
