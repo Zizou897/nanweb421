@@ -3,54 +3,16 @@
 {% block content %}
 
     <!-- Welcome Blog Slide Area Start -->
-    <section class="welcome-blog-post-slide owl-carousel">
+    <div id="data">
+    <section  class="welcome-blog-post-slide owl-carousel">
         <!-- Single Blog Post -->
-        <div class="single-blog-post-slide bg-img background-overlay-5" style="background-image: url({% static 'assets/img/bg-img/1.jpg' %});">
+        <div v-for="art in article" class="single-blog-post-slide bg-img background-overlay-5"  v-bind:style="{ backgroundImage: 'url(' + art.picture + ')' }">
             <!-- Single Blog Post Content -->
             <div class="single-blog-post-content">
                 <div class="tags">
-                    <a href="{% url 'catagory' %}">crypto</a>
+                    <a href="{% url 'catagory' %}">%{art.category.name}</a>
                 </div>
-                <h3><a href="{% url 'detail' %}" class="font-pt">Crypto world goes mad</a></h3>
-                <div class="date">
-                    <a href="#">March 29, 2018</a>
-                </div>
-            </div>
-        </div>
-        <!-- Single Blog Post -->
-        <div class="single-blog-post-slide bg-img background-overlay-5" style="background-image: url({% static 'assets/img/bg-img/2.jpg' %});">
-            <!-- Single Blog Post Content -->
-            <div class="single-blog-post-content">
-                <div class="tags">
-                    <a href="{% url 'catagory' %}">live</a>
-                </div>
-                <h3><a href="{% url 'detail' %}" class="font-pt">The latest news live</a></h3>
-                <div class="date">
-                    <a href="#">March 29, 2018</a>
-                </div>
-            </div>
-        </div>
-        <!-- Single Blog Post -->
-        <div class="single-blog-post-slide bg-img background-overlay-5" style="background-image: url({% static 'assets/img/bg-img/3.jpg' %});">
-            <!-- Single Blog Post Content -->
-            <div class="single-blog-post-content">
-                <div class="tags">
-                    <a href="{% url 'catagory' %}">politices</a>
-                </div>
-                <h3><a href="{% url 'detail' %}" class="font-pt">Financial advices </a></h3>
-                <div class="date">
-                    <a href="#">March 29, 2018</a>
-                </div>
-            </div>
-        </div>
-        <!-- Single Blog Post -->
-        <div class="single-blog-post-slide bg-img background-overlay-5" style="background-image: url({% static 'assets/img/bg-img/2.jpg' %});">
-            <!-- Single Blog Post Content -->
-            <div class="single-blog-post-content">
-                <div class="tags">
-                    <a href="{% url 'catagory' %}">live</a>
-                </div>
-                <h3><a href="{% url 'detail' %}" class="font-pt">The latest news live</a></h3>
+                <h3><a href="{% url 'detail' %}" class="font-pt">%{art.title}</a></h3>
                 <div class="date">
                     <a href="#">March 29, 2018</a>
                 </div>
@@ -64,10 +26,10 @@
         <div class="simple-marquee-container">
             <div class="marquee">
                 <ul class="marquee-content-items">
-                    <li>
-                        <a href="#"><span class="latest-news-time">10:40</span> The Facebook Live stream that could presage TV</a>
+                    <li v-for="text in textBar">
+                        <a href="#"><span class="latest-news-time">10:40</span>%{text.title}</a>
                     </li>
-                    <li>
+                    {% comment %} <li>
                         <a href="#"><span class="latest-news-time">11:02</span> Opinion: It's time to start talking about impeachment</a>
                     </li>
                     <li>
@@ -75,10 +37,11 @@
                     </li>
                     <li>
                         <a href="#"><span class="latest-news-time">13:59</span> Trump signs tax bill before leaving for Mar-a-Lago</a>
-                    </li>
+                    </li> {% endcomment %}
                 </ul>
             </div>
         </div>
+    </div>
     </div>
     <!-- Latest News Marquee Area End -->
 
@@ -233,11 +196,11 @@
                             <div class="widget-title">
                                 <h5>subscribe</h5>
                             </div>
-                            <div id="form" class="subscribe-form">
+                            <div id="register" class="subscribe-form">
                                 <form action="#">
                                 {% csrf_token %}
-                                    <input type="email" v-model="email" name="email" id="subs_email" placeholder="Your Email">
-                                    <button @click.prevent="registersEmail" type="submit">subscribe</button>
+                                    <input type="email" v-model="email" name="email" id="subs_email" placeholder="Votre Email">
+                                    <button @click.prevent="registersEmail" type="submit">S'abonner</button>
                                 </form>
                             </div>
                         </div>
