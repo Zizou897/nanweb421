@@ -404,8 +404,9 @@
             el: "#dynamique",
             data(){
                 return{
-                    categorie_return: []
-                }
+                    categorie_return: [],
+                    artice: []
+                    }
             },
             delimiters: [ '%{', '}'],
             methods(){
@@ -416,6 +417,15 @@
                         id
                         name
                     }
+                    recentArticles{
+                        id
+                        title
+                        description
+                        category{
+                            id
+                            name
+                        }
+                    }
                 }`
                 }, 
                 {
@@ -423,9 +433,10 @@
                         'Content-Type': 'application/json'
                     }
                 }
-                ).then((response)=>
+                ).then((response)=>{
                     console.log(response)
-                )
+                    this.article = response.data.data?.recentArticles
+                })
             }
         })
     </script>
