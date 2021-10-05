@@ -404,26 +404,29 @@
             el: "#dynamique",
             data(){
                 return{
-                    categorie_return: null
+                    categorie_return: []
                 }
             },
             delimiters: [ '%{', '}'],
             methods(){
-                axios.get('https://nannews.herokuapp.com/api/category/',{
-                    headers:{
-                        'xsrfHeaderName': 'X-CSRFToken',
-                        'xsrfCookieName': 'csrftoken'
+                axios.post("http://nannews.herokuapp.com/graphql", {
+                query: `
+                    {
+                    category{
+                        id
+                        name
                     }
-                })
-                .then(response =>{
-                    (this.info = response.data);
-                })
-                .catch(error => console.log(error))
-            },
-            computed: {
-             
+                }`
+                }, 
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+                ).then((response)=>
+                    console.log(response)
+                )
             }
-
         })
     </script>
 
