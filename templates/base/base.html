@@ -59,7 +59,7 @@
                             <nav class="navbar navbar-expand-lg">
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gazetteMenu" aria-controls="gazetteMenu" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i> Menu</button>
                                 <div class="collapse navbar-collapse" id="gazetteMenu">
-                                    <ul id="datacat" class="navbar-nav mr-auto">
+                                    <ul id="data" class="navbar-nav mr-auto">
                                         <li class="nav-item active">
                                             <a class="nav-link" href="{% url 'index' %}">Accueil <span class="sr-only">(current)</span></a>
                                         </li>
@@ -110,10 +110,12 @@
             </div>
         </div>
     <!-- Header Area End -->
+    <main id="content-vue">
 
-    {% block content %}
+        {% block content %}
 
-    {% endblock content %}
+        {% endblock content %}
+    </main>
 
     <!-- Footer Area Start -->
     <footer class="footer-area bg-img background-overlay" style="background-image: url({% static 'assets/img/bg-img/4.jpg' %});">
@@ -420,12 +422,17 @@
         })
     </script>
 
+    
+    {% block vue %}
+        
+    {% endblock vue %}
+        
+
     <script>
         new Vue({
             el: "#data",
             data:{
-                categorie: [],
-                article: [],
+                categorie: []
             },
             delimiters: ['%{', '}'],
             mounted(){
@@ -435,6 +442,43 @@
                         category{
                             id
                             name
+                        },
+                        
+                    }`
+                    }, 
+                    {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                    ).then((response)=>{
+                        console.log(response)
+                        this.categorie = response.data.data?.category
+                        setTimeout(this.refresh_reload, 1500);
+    
+                    })
+            }
+    
+        })
+    </script>
+
+
+    <script>
+        new Vue({
+            el: "#dataArt",
+            data:{
+                article: [],
+                textBar: []
+            },
+            delimiters: ['%{', '}'],
+            mounted(){
+                axios.post("http://nannews.herokuapp.com/graphql", {
+                    query: `
+                        {
+                        recentArticlesTitle{
+                            id
+                            title
+                            datePublication
                         },
                         recentArticles{
                             id
@@ -456,47 +500,6 @@
                     ).then((response)=>{
                         console.log(response)
                         this.article = response.data.data?.recentArticles
-                        this.categorie = response.data.data?.category
-                        setTimeout(this.refresh_reload, 1500);
-    
-                    })
-            }
-    
-        })
-    </script>
-
-
-    <script>
-        new Vue({
-            el: "#datacat",
-            data:{
-                categorie: [],
-                textBar: []
-            },
-            delimiters: ['%{', '}'],
-            mounted(){
-                axios.post("http://nannews.herokuapp.com/graphql", {
-                    query: `
-                        {
-                        category{
-                            id
-                            name
-                        },
-                        recentArticlesTitle{
-                            id
-                            title
-                            datePublication
-                        }
-                    }`
-                    }, 
-                    {
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    }
-                    ).then((response)=>{
-                        console.log(response)
-                        this.categorie = response.data.data?.category
                         this.textBar = response.data.data?.recentArticlesTitle
                         setTimeout(this.refresh_reload, 1500);
     
