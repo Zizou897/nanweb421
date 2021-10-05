@@ -22,12 +22,12 @@
     <section class="gazette-contact-area section_padding_100">
         <div class="container">
             <div class="row">
-                <div id="contact" class="col-12 col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="gazette-heading">
                         <h4 class="font-bold">address</h4>
                     </div>
                     <!-- Contact Form --> 
-                    <form action="#" method="post">
+                    <form id="contact" action="#" method="post">
                     {% csrf_token %}
                         <div class="form-group">
                             <input type="text" class="form-control" name="name"  id="contact-name" v-model='name' placeholder="Enter Your Full Name">
@@ -68,3 +68,80 @@
 
 
 {% endblock content %}
+
+<script>
+    new Vue({
+        el:'#contact',
+        data:{
+            name:'',
+            email:'',
+            message:'',
+            url:"{% url 'checkup' %}"
+        },
+        delimiters: ['%{', '}'],
+        methods:{
+            postData(){
+                if (this.name === '' || this.email === '' || this.message === ''){
+                  swal.fire({
+                    icon:'error',
+                    text:'Veuillez remplir les champs vides',
+                    showConfirmButton:false,
+                    timer:2000,
+                  })
+                }
+                else if (!/[A-Za-z'éèöïäëû ]+/.test(this.name)){
+                  swal.fire({
+                    icon:'error',
+                    text:'Veuillez saisir un nom valide',
+                    showConfirmButton:false,
+                    timer:2000,
+                  })
+                }
+                else if (!/(\w\.?)+@(\w\.?)+\.[A-Za-z]{2,3}/.test(this.email)){
+                  swal.fire({
+                    icon:'error',
+                    text:'Veuillez saisir un email valide',
+                    showConfirmButton:false,
+                    timer:2000,
+                  })
+                }
+                else{
+                  axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+                  axios.defaults.xsrfCookieName = 'csrftoken'
+                  
+                  let form = new FormData()
+  
+                  form.append('name', this.name)
+                  form.append('email', this.email)
+                  form.append('message', this.message)
+                  
+                  axios.post(this.url, form).then((response) => {
+                    if (response.data.success){
+                      swal.fire({
+                        icon:'success',
+                        text:response.data.text,
+                        showConfirmButton:false,
+                        timer:2000,
+                      })
+                      this.name = ""
+                      this.email = ""
+                      this.message =""
+                    }
+                    else {
+                      swal.fire({
+                        icon:'error',
+                        text:response.data.text,
+                        showConfirmButton:false,
+                        timer:2000,
+                      })
+                    }
+                  }).catch((e) => {
+                    console.log(e)
+                  })
+                  
+                }
+              }
+        }
+
+    })
+</script>
