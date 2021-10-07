@@ -63,16 +63,70 @@
             </div>
         </section>
         <!-- Welcome Blog Slide Area End -->
-      {% comment %} <img class="d-block w-100" src="..." alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="..." alt="Second slide">
+    
+        <div class="carousel-item">
+        <section class="welcome-blog-post-slide owl-carousel">
+                <!-- Single Blog Post -->
+                <div id="dynamique">
+                <div v-for="art in article" class="single-blog-post-slide bg-img background-overlay-5" style="background-image: url({% static 'assets/img/bg-img/1.jpg' %});">
+                    <!-- Single Blog Post Content -->
+                    <div class="single-blog-post-content">
+                        <div class="tags">
+                            <a href="{% url 'catagory' %}">%{art.category.name}</a>
+                        </div>
+                        <h3><a href="{% url 'detail' %}" class="font-pt">%{art.title}</a></h3>
+                        <div class="date">
+                            <a href="#">March 29, 2018</a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!-- Single Blog Post -->
+                <div class="single-blog-post-slide bg-img background-overlay-5" style="background-image: url({% static 'assets/img/bg-img/2.jpg' %});">
+                    <!-- Single Blog Post Content -->
+                    <div class="single-blog-post-content">
+                        <div class="tags">
+                            <a href="{% url 'catagory' %}">live</a>
+                        </div>
+                        <h3><a href="{% url 'detail' %}" class="font-pt">The latest news live</a></h3>
+                        <div class="date">
+                            <a href="#">March 29, 2018</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Single Blog Post -->
+                <div class="single-blog-post-slide bg-img background-overlay-5" style="background-image: url({% static 'assets/img/bg-img/3.jpg' %});">
+                    <!-- Single Blog Post Content -->
+                    <div class="single-blog-post-content">
+                        <div class="tags">
+                            <a href="{% url 'catagory' %}">politices</a>
+                        </div>
+                        <h3><a href="{% url 'detail' %}" class="font-pt">Financial advices </a></h3>
+                        <div class="date">
+                            <a href="#">March 29, 2018</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Single Blog Post -->
+                <div class="single-blog-post-slide bg-img background-overlay-5" style="background-image: url({% static 'assets/img/bg-img/2.jpg' %});">
+                    <!-- Single Blog Post Content -->
+                    <div class="single-blog-post-content">
+                        <div class="tags">
+                            <a href="{% url 'catagory' %}">live</a>
+                        </div>
+                        <h3><a href="{% url 'detail' %}" class="font-pt">The latest news live</a></h3>
+                        <div class="date">
+                            <a href="#">March 29, 2018</a>
+                        </div>
+                    </div>
+                </div>
+{% comment %}      
     </div>
     <div class="carousel-item">
       <img class="d-block w-100" src="..." alt="Third slide">
     </div>
   </div>
-</div> {% endcomment %}
+</div> {% endcomment %} 
 
     <!-- Latest News Marquee Area Start -->
     <div class="latest-news-marquee-area">
