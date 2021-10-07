@@ -15,7 +15,7 @@
                     </div>
                     <h3><a href="{% url 'detail' %}" class="font-pt">%{art.title}</a></h3>
                     <div class="date">
-                        <a href="#">March 29, 2018</a>
+                        <a href="#">%{art.id}</a>
                     </div>
                 </div>
             </div>
@@ -42,51 +42,6 @@
                 </div>
                 </div>
                 <!-- Single Blog Post -->
-                <div class="single-blog-post-slide bg-img background-overlay-5" style="background-image: url({% static 'assets/img/bg-img/2.jpg' %});">
-                    <!-- Single Blog Post Content -->
-                    <div class="single-blog-post-content">
-                        <div class="tags">
-                            <a href="{% url 'catagory' %}">live</a>
-                        </div>
-                        <h3><a href="{% url 'detail' %}" class="font-pt">The latest news live</a></h3>
-                        <div class="date">
-                            <a href="#">March 29, 2018</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Blog Post -->
-                <div class="single-blog-post-slide bg-img background-overlay-5" style="background-image: url({% static 'assets/img/bg-img/3.jpg' %});">
-                    <!-- Single Blog Post Content -->
-                    <div class="single-blog-post-content">
-                        <div class="tags">
-                            <a href="{% url 'catagory' %}">politices</a>
-                        </div>
-                        <h3><a href="{% url 'detail' %}" class="font-pt">Financial advices </a></h3>
-                        <div class="date">
-                            <a href="#">March 29, 2018</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Blog Post -->
-                <div class="single-blog-post-slide bg-img background-overlay-5" style="background-image: url({% static 'assets/img/bg-img/2.jpg' %});">
-                    <!-- Single Blog Post Content -->
-                    <div class="single-blog-post-content">
-                        <div class="tags">
-                            <a href="{% url 'catagory' %}">live</a>
-                        </div>
-                        <h3><a href="{% url 'detail' %}" class="font-pt">The latest news live</a></h3>
-                        <div class="date">
-                            <a href="#">March 29, 2018</a>
-                        </div>
-                    </div>
-                </div>
-{% comment %}      
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="..." alt="Third slide">
-    </div>
-  </div>
-</div> {% endcomment %} 
 
   
 
@@ -216,22 +171,22 @@
                         </div>
 
                         <!-- Don't Miss Widget -->
-                        <div class="donnot-miss-widget">
+                        <div id="dataArtThree" class="donnot-miss-widget">
                             <div class="widget-title">
                                 <h5>Don't miss</h5>
                             </div>
                             <!-- Single Don't Miss Post -->
-                            <div class="single-dont-miss-post d-flex mb-30">
+                            <div v-for="arti in article" class="single-dont-miss-post d-flex mb-30">
                                 <div class="dont-miss-post-thumb">
-                                    <img src="{% static 'assets/img/blog-img/dm-1.jpg' %}" alt="">
+                                    <img :src="{% static 'assets/img/blog-img/dm-1.jpg' %}" alt="">
                                 </div>
                                 <div class="dont-miss-post-content">
-                                    <a href="#" class="font-pt">EU council reunites</a>
-                                    <span>Nov 29, 2017</span>
+                                    <a href="#" class="font-pt">%{arti.title}</a>
+                                    <span>%{arti.datePublication}</span>
                                 </div>
                             </div>
                             <!-- Single Don't Miss Post -->
-                            <div class="single-dont-miss-post d-flex mb-30">
+                            {% comment %} <div class="single-dont-miss-post d-flex mb-30">
                                 <div class="dont-miss-post-thumb">
                                     <img src="{% static 'assets/img/blog-img/dm-2.jpg' %}" alt="">
                                 </div>
@@ -239,9 +194,9 @@
                                     <a href="#" class="font-pt">A new way to travel the world</a>
                                     <span>March 29, 2016</span>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                             <!-- Single Don't Miss Post -->
-                            <div class="single-dont-miss-post d-flex mb-30">
+                            {% comment %} <div class="single-dont-miss-post d-flex mb-30">
                                 <div class="dont-miss-post-thumb">
                                     <img src="{% static 'assets/img/blog-img/dm-3.jpg' %}" alt="">
                                 </div>
@@ -249,7 +204,7 @@
                                     <a href="#" class="font-pt">Why choose a bank?</a>
                                     <span>March 29, 2016</span>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                         </div>
                         <!-- Advert Widget -->
                         <div class="advert-widget">
@@ -649,3 +604,55 @@
     
 
     {% endblock vue %}
+
+
+    {% block vue1 %}
+        {% comment %} content-vue {% endcomment %}
+        <script>
+        new Vue({
+            el: "#dataArtThree",
+            data:{
+                article: [],
+                textBar: []
+            },
+            delimiters: ['%{', '}'],
+            mounted(){
+                axios.post("http://nannews.herokuapp.com/graphql", {
+                    query: `
+                        {
+                        recentArticlesTitle{
+                            id
+                            title
+                            datePublication
+                        },
+                        recentArticles{
+                            id
+                            title
+                            picture
+                            description
+                            category{
+                                id
+                                name
+                            }
+                        }
+                    }`
+                    }, 
+                    {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                    ).then((response)=>{
+                        console.log(response)
+                        this.article = response.data.data?.recentArticles
+                        this.textBar = response.data.data?.recentArticlesTitle
+                        setTimeout(this.refresh_reload, 1500);
+    
+                    })
+            }
+    
+        })
+    </script>
+    
+
+    {% endblock vue1 %}
