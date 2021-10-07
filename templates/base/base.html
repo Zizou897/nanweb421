@@ -463,52 +463,7 @@
     </script>
 
 
-    <script>
-        new Vue({
-            el: "#dataArt",
-            data:{
-                article: [],
-                textBar: []
-            },
-            delimiters: ['%{', '}'],
-            mounted(){
-                axios.post("http://nannews.herokuapp.com/graphql", {
-                    query: `
-                        {
-                        recentArticlesTitle{
-                            id
-                            title
-                            datePublication
-                        },
-                        recentArticles{
-                            id
-                            title
-                            picture
-                            description
-                            category{
-                                id
-                                name
-                            }
-                        }
-                    }`
-                    }, 
-                    {
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    }
-                    ).then((response)=>{
-                        console.log(response)
-                        this.article = response.data.data?.recentArticles
-                        this.textBar = response.data.data?.recentArticlesTitle
-                        setTimeout(this.refresh_reload, 1500);
-    
-                    })
-            }
-    
-        })
-    </script>
-    
+   
 </div>
 </body>
 

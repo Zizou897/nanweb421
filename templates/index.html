@@ -3,21 +3,17 @@
 {% block content %}
 
 
-       
-           
-   
-
     <div id="dataArt">
         <section class="welcome-blog-post-slide owl-carousel">
             <!-- Single Blog Post -->          
             <!-- Single Blog Post -->
-            <div class="single-blog-post-slide bg-img background-overlay-5" style="background-image: url({% static 'assets/img/bg-img/2.jpg' %});">
+            <div  v-for="art in article" class="single-blog-post-slide bg-img background-overlay-5" v-bind:style="{ backgroundImage: 'url(' + art.picture + ')' }">
                 <!-- Single Blog Post Content -->
-                <div v-for="art in article" class="single-blog-post-content">
+                <div class="single-blog-post-content">
                     <div class="tags">
                         <a href="{% url 'catagory' %}">%{art.category.name}</a>
                     </div>
-                    <h3><a href="{% url 'detail' %}" class="font-pt">T%{art.title}</a></h3>
+                    <h3><a href="{% url 'detail' %}" class="font-pt">%{art.title}</a></h3>
                     <div class="date">
                         <a href="#">March 29, 2018</a>
                     </div>
@@ -35,7 +31,7 @@
                 <div class="marquee">
                     <ul class="marquee-content-items">
                         <li v-for="text in textBar">
-                            <a href="#"><span class="latest-news-time">%{text.datePublication}</span>%{text.title}</a>
+                            <a href="#"><span class="latest-news-time">10h40</span>%{text.title}</a>
                         </li>
                         {% comment %} <li>
                             <a href="#"><span class="latest-news-time">11:02</span> Opinion: It's time to start talking about impeachment</a>
@@ -539,5 +535,52 @@
 
     
     {% block vue %}
-        #content-vue
+        {% comment %} content-vue {% endcomment %}
+         <script>
+        new Vue({
+            el: "#dataArt",
+            data:{
+                article: [],
+                textBar: []
+            },
+            delimiters: ['%{', '}'],
+            mounted(){
+                axios.post("http://nannews.herokuapp.com/graphql", {
+                    query: `
+                        {
+                        recentArticlesTitle{
+                            id
+                            title
+                            datePublication
+                        },
+                        recentArticles{
+                            id
+                            title
+                            picture
+                            description
+                            category{
+                                id
+                                name
+                            }
+                        }
+                    }`
+                    }, 
+                    {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                    ).then((response)=>{
+                        console.log(response)
+                        this.article = response.data.data?.recentArticles
+                        this.textBar = response.data.data?.recentArticlesTitle
+                        setTimeout(this.refresh_reload, 1500);
+    
+                    })
+            }
+    
+        })
+    </script>
+    
+
     {% endblock vue %}
