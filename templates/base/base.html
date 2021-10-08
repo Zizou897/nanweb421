@@ -256,182 +256,25 @@
     <script src="{% static 'assets/js/active.js' %}"></script>
 
         <!-- Google Maps js -->
-    {% comment %} <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk9KNSL1jTv4MY9Pza6w8DJkpI_nHyCnk"></script>
-    <script src="{% static 'assets/js/map-active.js' %}"></script> {% endcomment %}
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- bootstrap script slide  -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-
-
-    <script>
-      new Vue(
-        {
-          el:'#register',
-          data:{
-            email:'',
-            
-          },
-          methods:{
-
-            
-            registersEmail(){
-                if(!this.email){
-                    swal.fire({
-                        icon:'error',
-                        text: 'veuillez remplir ce champ avant de le soumettre !!!',
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
-                }
-                else if (!/(\w\.?)+@(\w\.?)+\.[A-Za-z]{2,3}/.test(this.email)){
-                    swal.fire({
-                        icon: 'error',
-                        text: 'Email invalide',
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
-                }
-                else{
-
-                    let form = new FormData()
-                    form.append('email', JSON.stringify(this.email))
-
-                    axios.defaults.xsrfCookieName = 'XSRF-TOKEN'
-                    axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN'
-                    axios.post("{% url 'registerEmail' %}", form)
-                    .then((response) =>{
-                        if(response.data.success){
-                            swal.fire({
-                                icon:'success',
-                                text: response.data.msg,
-                                showConfirmButton: false,
-                                timer: 2000
-                            })
-                            this.email = ""
-                        }
-                        else{
-                            swal.fire({
-                                icon:'error',
-                                text: response.data.msg,
-                                showConfirmButton: false,
-                                timer: 2000
-                            })
-                        }
-                    })
-                    .catch((e) => {
-                        console.log(e)
-                    })
-                }
-            },
-
-            refresh_reload(){
-                $(document).ready(function(){
-                    $(".owl-carousel").owlCarousel();
-                });
-                console.log("TEST")
-            }
-
-          },
-          delimiters: ['%{', '}']
-        }
-      )
-
-
-    </script>
-
-    <script>
-
-        new Vue({
-            el:'#contact',
-            data:{
-                name:'',
-                email:'',
-                message:'',
-                url:"{% url 'checkup' %}",
-            
-            },
-          delimiters: ['%{', '}'],
-            methods:{
-                postData(){
-                    if (this.name === '' || this.email === '' || this.message === ''){
-                    swal.fire({
-                        icon:'error',
-                        text:'Veuillez remplir les champs vides',
-                        showConfirmButton:false,
-                        timer:2000,
-                    })
-                    }
-                    else if (!/[A-Za-z'éèöïäëû ]+/.test(this.name)){
-                    swal.fire({
-                        icon:'error',
-                        text:'Veuillez saisir un nom valide',
-                        showConfirmButton:false,
-                        timer:2000,
-                    })
-                    }
-                    else if (!/(\w\.?)+@(\w\.?)+\.[A-Za-z]{2,3}/.test(this.email)){
-                    swal.fire({
-                        icon:'error',
-                        text:'Veuillez saisir un email valide',
-                        showConfirmButton:false,
-                        timer:2000,
-                    })
-                    }
-                    else{
-                    axios.defaults.xsrfHeaderName = 'X-CSRFToken'
-                    axios.defaults.xsrfCookieName = 'csrftoken'
-                    
-                    let form = new FormData()
-    
-                    form.append('name', this.name)
-                    form.append('email', this.email)
-                    form.append('message', this.message)
-                    
-                    axios.post(this.url, form).then((response) => {
-                        if (response.data.success){
-                        swal.fire({
-                            icon:'success',
-                            text:response.data.text,
-                            showConfirmButton:false,
-                            timer:2000,
-                        })
-                        this.name = ""
-                        this.email = ""
-                        this.message =""
-                        }
-                        else {
-                        swal.fire({
-                            icon:'error',
-                            text:response.data.text,
-                            showConfirmButton:false,
-                            timer:2000,
-                        })
-                        }
-                    }).catch((e) => {
-                        console.log(e)
-                    })
-                    
-                    }
-                },
-            }
-        })
-    </script>
-
-    
-    {% block vue %}
+    {% block scripts %}
         
-    {% endblock vue %}
+    {% endblock scripts %}
 
-    {% block vue1 %}
-        
-    {% endblock vue1%}
-        
 
+   {% comment %} Email and contact confirm {% endcomment %}
+
+
+    {% block vuejs %}
+        
+    {% endblock vuejs %}
+  
+{% comment %} Diferents category in menu {% endcomment %}
     <script>
         new Vue({
             el: "#data",
@@ -465,8 +308,7 @@
     
         })
     </script>
-
-
+{% comment %} Diferents category in menu {% endcomment %}
    
 </div>
 </body>

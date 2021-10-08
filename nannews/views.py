@@ -28,7 +28,7 @@ def contact(request):
     return render(request, "contact.html", locals())
 
 
-def detail(request):
+def detail(request, idt=None):
     site_web = models.Site.objects.filter(status=True).first()
     return render(request, "single-post.html", locals())
 
