@@ -41,6 +41,7 @@
                 </div>
 
                 <div class="row">
+                    
                     {% for team in teams %}
                         <div class="col-12 col-sm-6 col-md-3">
                             <div class="single-team-area">
@@ -59,6 +60,7 @@
                             </div>
                         </div>
                     {% endfor %}
+                    
 
                     {% comment %} <div class="col-12 col-sm-6 col-md-3">
                         <div class="single-team-area">
@@ -133,3 +135,23 @@
         </div>
     </section>
 {% endblock content %}
+
+<script>
+
+$('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
+        }
+    }
+})
+</script>

@@ -64,7 +64,17 @@
                                             <a class="nav-link" href="{% url 'index' %}">Accueil <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li v-for="(cat, index) in categorie" class="nav-item">
-                                            <a v-if="cat.name.length< 10 && index < 19" class="nav-link" href="{% url 'catagory' %}">%{cat.name}</a>
+                                            <a v-if="cat.name.length< 10 && index < 17" class="nav-link" href="{% url 'catagory' %}">%{cat.name}</a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Autres</a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="index.html">Politics</a>
+                                                <a class="dropdown-item" href="catagory.html">Sport</a>
+                                                <a class="dropdown-item" href="single-post.html">Culture</a>
+                                                <a class="dropdown-item" href="about-us.html">Débat</a>
+                                                <a class="dropdown-item" href="contact.html">Santé</a>
+                                            </div>
                                         </li>
                                         {% comment %} <li class="nav-item">
                                             <a class="nav-link" href="{% url 'catagory' %}">Lifestyle</a>
