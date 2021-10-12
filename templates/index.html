@@ -3,11 +3,11 @@
 {% block content %}
 
 
-    <div id="dataArt">
-        <section class="welcome-blog-post-slide owl-carousel">
+    <div >
+        <section id="dataArt" class="welcome-blog-post-slide">
             <!-- Single Blog Post -->          
             <!-- Single Blog Post -->
-            <div  v-for="art in article" class="single-blog-post-slide bg-img background-overlay-5" v-bind:style="{ backgroundImage: 'url(' + art.picture + ')' }">
+            <div  v-for="art in article" class="single-blog-post-slide bg-img background-overlay-5" :style="{ backgroundImage: 'url(' + art.picture + ')' }">
                 <!-- Single Blog Post Content -->
                 <div class="single-blog-post-content">
                     <div class="tags">
@@ -26,22 +26,13 @@
 
 
         <!-- Latest News Marquee Area Start -->
-        <div class="latest-news-marquee-area">
+        <div id="dataArtTitle" class="latest-news-marquee-area">
             <div class="simple-marquee-container">
                 <div class="marquee">
                     <ul class="marquee-content-items">
-                        <li v-for="text in textBar">
+                        <li v-for="text in textBar.slice(0,3)">
                             <a href="#"><span class="latest-news-time">10h40</span>%{text.title}</a>
                         </li>
-                        {% comment %} <li>
-                            <a href="#"><span class="latest-news-time">11:02</span> Opinion: It's time to start talking about impeachment</a>
-                        </li>
-                        <li>
-                            <a href="#"><span class="latest-news-time">12:37</span> Clinton aims to shore up Wisconsin with new TV ads</a>
-                        </li>
-                        <li>
-                            <a href="#"><span class="latest-news-time">13:59</span> Trump signs tax bill before leaving for Mar-a-Lago</a>
-                        </li> {% endcomment %}
                     </ul>
                 </div>
             </div>
@@ -53,66 +44,51 @@
     <section class="main-content-wrapper section_padding_100">
         <div class="container">
             <div class="row">
-                <div id="articlePhare" class="col-12 col-lg-9">
+                <div  class="col-12 col-lg-9">
                     <!-- Gazette Welcome Post -->
-                    <div v-for="popular in popularArticle" class="gazette-welcome-post">
-                        <!-- Post Tag -->
-                        <div class="gazette-post-tag">
-                            <a href="{% url 'catagory' %}">%{popular.category.name}</a>
-                        </div>
-                        <a :href="'/detail/' + popular.id + '/'"><h2 class="font-pt">%{popular.title}</h2></a>
-                        <p class="gazette-post-date">%{popular.datePublication}</p>
-                        <!-- Post Thumbnail -->
-                        <div class="blog-post-thumbnail my-5">
-                            <img :src="popular.picture" alt="post-thumb">
-                        </div>
-                        <!-- Post Excerpt -->
-                        <p v-html="$options.filters.truncate_data(popular.description, 200)"></p>
-                        <!-- Reading More -->
-                        <div class="post-continue-reading-share d-sm-flex align-items-center justify-content-between mt-30">
-                            <div class="post-continue-btn">
-                                <a :href="'/detail/' + popular.id + '/'" class="font-pt">Lire plus<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    <div id="articlePhare">
+                        <div  v-for="(popular,index) in popularArticle"  v-if="index == 0" class="gazette-welcome-post">
+                            <!-- Post Tag -->
+                            <div class="gazette-post-tag">
+                                <a href="{% url 'catagory' %}">%{popular.category.name}</a>
+                            </div>
+                            <a :href="'/detail/' + popular.id + '/'"><h2 class="font-pt">%{popular.title}</h2></a>
+                            <p class="gazette-post-date">%{popular.datePublication}</p>
+                            <!-- Post Thumbnail -->
+                            <div class="blog-post-thumbnail my-5">
+                                <img :src="popular.picture" alt="post-thumb">
+                            </div>
+                            <!-- Post Excerpt -->
+                            <p v-html="$options.filters.truncate_data(popular.description, 200)"></p>
+                            <!-- Reading More -->
+                            <div class="post-continue-reading-share d-sm-flex align-items-center justify-content-between mt-30">
+                                <div class="post-continue-btn">
+                                    <a :href="'/detail/' + popular.id + '/'" class="font-pt">Lire plus<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                     <div id="Popular1" class="gazette-todays-post section_padding_100_50">
                         <div class="gazette-heading">
                             <h4>Les Plus Populaires</h4>
                         </div>
                         <!-- Single Today Post -->
-                        <div v-for="pop1 in populaire_articles"  class="gazette-single-todays-post d-md-flex align-items-start mb-50">
+                        <div v-for="pop1 in populaire_articles.slice(1,3)"  class="gazette-single-todays-post d-md-flex align-items-start mb-50">
                             <div class="todays-post-thumb">
-                                <img src="{% static 'assets/img/blog-img/2.jpg' %}" alt="">
+                                <img :src="pop1.picture" alt="">
                             </div>
                             <div class="todays-post-content">
                                 <!-- Post Tag -->
                                 <div class="gazette-post-tag">
                                     <a href="{% url 'catagory' %}">%{pop1.category.name}</a>
                                 </div>
-                                <h3><a href="{% url 'detail' %}" class="font-pt mb-2">$250-million mansion is most expensive</a></h3>
-                                <span class="gazette-post-date mb-2">March 29, 2016</span>
+                                <h3><a href="{% url 'detail' %}" class="font-pt mb-2">%{pop1.title}</a></h3>
+                                <span class="gazette-post-date mb-2">%{pop1.datePublication}</span>
                                 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend. Nullam viverra tincidunt dolor, at pulvinar dui. Nullam at risus ut ipsum viverra posuere.</p>
+                                <p v-html="$options.filters.truncate_data(pop1.description, 200)"></p>
                             </div>
                         </div>
                         <!-- Single Today Post -->
-                        {% comment %} <div class="gazette-single-todays-post d-md-flex align-items-start mb-50">
-                            <div class="todays-post-thumb">
-                                <img src="{% static 'assets/img/blog-img/3.jpg' %}" alt="">
-                            </div>
-                            <div class="todays-post-content">
-                                <!-- Post Tag -->
-                                <div class="gazette-post-tag">
-                                    <a href="#">Life</a>
-                                </div>
-                                <h3><a href="{% url 'detail' %}" class="font-pt mb-2">Homeless man steals $350,000 </a></h3>
-                                <p class="gazette-post-date mb-2">March 29, 2016</p>
-                                <a href="#" class="post-total-comments">3 Comments</a>
-                                <p>Aliquam quis convallis enim. Nunc pulvinar molestie sem id blandit. Nunc venenatis interdum mollis. Aliquam finibus nulla quam, a iaculis justo finibus non. Suspendisse in fermentum nunc.</p>
-                            </div>
-                        </div> {% endcomment %}
-
                     </div>
                 </div>
 
@@ -151,12 +127,12 @@
                                 <h5>à voir</h5>
                             </div>
                             <!-- Single Don't Miss Post -->
-                            <div v-for="arti in article" class="single-dont-miss-post d-flex mb-30">
+                            <div v-for="arti in article.slice(0,3)" class="single-dont-miss-post d-flex mb-30">
                                 <div class="dont-miss-post-thumb">
                                     <img :src="arti.picture" alt="">
                                 </div>
                                 <div class="dont-miss-post-content">
-                                    <a href="#" class="font-pt">%{arti.title}</a>
+                                    <a :href="'detail/' + arti.id + '/'" class="font-pt">%{arti.title}</a>
                                     <span>%{arti.datePublication}</span>
                                 </div>
                             </div>
@@ -196,8 +172,8 @@
                 <div class="row">
                     <div id="title1" class="col-12 col-md-4">
                         <!-- Single Catagory Post -->
-                        <div v-for="(tit_art, index) in article_title" class="gazette-single-catagory-post">
-                            <div v-if=" index < 4">
+                        <div v-for="(tit_art, index) in article_title.slice(0,4)" class="gazette-single-catagory-post">
+                            <div >
                                 <div v-if="index == 0" class="single-catagory-post-thumb mb-15">
                                     <img :src="tit_art.picture" alt="">
                                 </div>
@@ -232,8 +208,8 @@
                     </div>
                     <div id="title2" class="col-12 col-md-4">
                         <!-- Single Catagory Post -->
-                        <div v-for="(title_art, index) in article_title"  class="gazette-single-catagory-post">
-                            <div v-if="index < 4">
+                        <div v-for="(title_art, index) in article_title.slice(4,8)" class="gazette-single-catagory-post">
+                            <div>
                                 <div v-if="index == 0" class="single-catagory-post-thumb mb-15">
                                     <img :src="title_art.picture" alt="">
                                 </div>
@@ -253,200 +229,18 @@
     <!-- Catagory Posts Area End -->
 
     <!-- Video Posts Area Start -->
-    {% comment %} <section class="gazatte-video-post-area section_padding_100_70 bg-gray">
-        <div class="container">
-            <div class="row">
-                <!-- Single Video Post Start -->
-                <div class="col-12 col-md-3">
-                    <div class="single-video-post">
-                        <div class="video-post-thumb">
-                            <img src="{% static 'assets/img/blog-img/4.jpg' %}" alt="">
-                            <a href="https://youtu.be/dIyXl9ZHEgg" class="videobtn"><i class="fa fa-play" aria-hidden="true"></i></a>
-                        </div>
-                        <h5><a href="#">Show suspended by PBS amid misconduct allegations</a></h5>
-                    </div>
-                </div>
-                <!-- Single Video Post Start -->
-                <div class="col-12 col-md-3">
-                    <div class="single-video-post">
-                        <div class="video-post-thumb">
-                            <img src="{% static 'assets/img/blog-img/5.jpg' %}" alt="">
-                            <a href="https://youtu.be/dIyXl9ZHEgg" class="videobtn"><i class="fa fa-play" aria-hidden="true"></i></a>
-                        </div>
-                        <h5><a href="#">Parents to Congress</a></h5>
-                    </div>
-                </div>
-                <!-- Single Video Post Start -->
-                <div class="col-12 col-md-3">
-                    <div class="single-video-post">
-                        <div class="video-post-thumb">
-                            <img src="{% static 'assets/img/blog-img/6.jpg' %}" alt="">
-                            <a href="https://youtu.be/dIyXl9ZHEgg" class="videobtn"><i class="fa fa-play" aria-hidden="true"></i></a>
-                        </div>
-                        <h5><a href="#">Third Buy Alert for This “Millionaire Maker” Stock</a></h5>
-                    </div>
-                </div>
-                <!-- Single Video Post Start -->
-                <div class="col-12 col-md-3">
-                    <div class="single-video-post">
-                        <div class="video-post-thumb">
-                            <img src="{% static 'assets/img/blog-img/7.jpg' %}" alt="">
-                            <a href="https://youtu.be/dIyXl9ZHEgg" class="videobtn"><i class="fa fa-play" aria-hidden="true"></i></a>
-                        </div>
-                        <h5><a href="#">The Chicago Mercantile Exchange is set to begin</a></h5>
-                    </div>
-                </div>
-                <!-- Single Video Post Start -->
-                <div class="col-12 col-md-3">
-                    <div class="single-video-post">
-                        <div class="video-post-thumb">
-                            <img src="{% static 'assets/img/blog-img/8.jpg' %}" alt="">
-                            <a href="https://youtu.be/dIyXl9ZHEgg" class="videobtn"><i class="fa fa-play" aria-hidden="true"></i></a>
-                        </div>
-                        <h5><a href="#">Trading bitcoin futures</a></h5>
-                    </div>
-                </div>
-                <!-- Single Video Post Start -->
-                <div class="col-12 col-md-3">
-                    <div class="single-video-post">
-                        <div class="video-post-thumb">
-                            <img src="{% static 'assets/img/blog-img/9.jpg' %}" alt="">
-                            <a href="https://youtu.be/dIyXl9ZHEgg" class="videobtn"><i class="fa fa-play" aria-hidden="true"></i></a>
-                        </div>
-                        <h5><a href="#">Are ‘Micro-Mansions’ the Next Big Thing?</a></h5>
-                    </div>
-                </div>
-                <!-- Single Video Post Start -->
-                <div class="col-12 col-md-3">
-                    <div class="single-video-post">
-                        <div class="video-post-thumb">
-                            <img src="{% static 'assets/img/blog-img/10.jpg' %}" alt="">
-                            <a href="https://youtu.be/dIyXl9ZHEgg" class="videobtn"><i class="fa fa-play" aria-hidden="true"></i></a>
-                        </div>
-                        <h5><a href="#">McKinney’s target market</a></h5>
-                    </div>
-                </div>
-                <!-- Single Video Post Start -->
-                <div class="col-12 col-md-3">
-                    <div class="single-video-post">
-                        <div class="video-post-thumb">
-                            <img src="{% static 'assets/img/blog-img/11.jpg' %}" alt="">
-                            <a href="https://youtu.be/dIyXl9ZHEgg" class="videobtn"><i class="fa fa-play" aria-hidden="true"></i></a>
-                        </div>
-                        <h5><a href="#">Australian Property Prices Remain Flat</a></h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> {% endcomment %}
+   
     <!-- Video Posts Area End -->
 
     <!-- Editorial Area Start -->
-    <section class="gazatte-editorial-area section_padding_100 bg-dark">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div id="section_article_slider" class="editorial-post-slides owl-carousel">
-
-                        <!-- Editorial Post Single Slide -->
-                        {% comment %} <div v-for="art_popular in popularArticle" class="editorial-post-single-slide">
-                            <div class="row">
-                                <div class="col-12 col-md-5">
-                                    <div class="editorial-post-thumb">
-                                        <img :src="art_popular.picture" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-7">
-                                    <div class="editorial-post-content">
-                                        <!-- Post Tag -->
-                                        <div class="gazette-post-tag">
-                                            <a href="#">%{art_popular.category.name}</a>
-                                        </div>
-                                        <h2><a href="#" class="font-pt mb-15">%{art_popular.title}</a></h2>
-                                        <p class="editorial-post-date mb-15">%{art_popular.datePublication}</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> {% endcomment %}
-
-                        <!-- Editorial Post Single Slide -->
-                        <div class="editorial-post-single-slide">
-                            <div class="row">
-                                <div class="col-12 col-md-5">
-                                    <div class="editorial-post-thumb">
-                                        <img src="{% static 'assets/img/blog-img/bitcoin.jpg' %}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-7">
-                                    <div class="editorial-post-content">
-                                        <!-- Post Tag -->
-                                        <div class="gazette-post-tag">
-                                            <a href="#">Editorial</a>
-                                        </div>
-                                        <h2><a href="#" class="font-pt mb-15">Move over, bitcoin. <br>Here comes litecoin</a></h2>
-                                        <p class="editorial-post-date mb-15">March 29, 2016</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend. Nullam viverra tincidunt dolor, at pulvinar dui. Nullam at risus ut ipsum viverra posuere. Aliquam quis convallis enim. Nunc pulvinar molestie sem id blandit. Nunc venenatis interdum mollis...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Editorial Post Single Slide -->
-                        <div class="editorial-post-single-slide">
-                            <div class="row">
-                                <div class="col-12 col-md-5">
-                                    <div class="editorial-post-thumb">
-                                        <img src="{% static 'assets/img/blog-img/bitcoin.jpg' %}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-7">
-                                    <div class="editorial-post-content">
-                                        <!-- Post Tag -->
-                                        <div class="gazette-post-tag">
-                                            <a href="#">Editorial</a>
-                                        </div>
-                                        <h2><a href="#" class="font-pt mb-15">Move over, bitcoin. <br>Here comes litecoin</a></h2>
-                                        <p class="editorial-post-date mb-15">March 29, 2016</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend. Nullam viverra tincidunt dolor, at pulvinar dui. Nullam at risus ut ipsum viverra posuere. Aliquam quis convallis enim. Nunc pulvinar molestie sem id blandit. Nunc venenatis interdum mollis...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Editorial Post Single Slide -->
-                        <div class="editorial-post-single-slide">
-                            <div class="row">
-                                <div class="col-12 col-md-5">
-                                    <div class="editorial-post-thumb">
-                                        <img src="{% static 'assets/img/blog-img/bitcoin.jpg' %}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-7">
-                                    <div class="editorial-post-content">
-                                        <!-- Post Tag -->
-                                        <div class="gazette-post-tag">
-                                            <a href="#">Editorial</a>
-                                        </div>
-                                        <h2><a href="#" class="font-pt mb-15">Move over, bitcoin. <br>Here comes litecoin</a></h2>
-                                        <p class="editorial-post-date mb-15">March 29, 2016</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend. Nullam viverra tincidunt dolor, at pulvinar dui. Nullam at risus ut ipsum viverra posuere. Aliquam quis convallis enim. Nunc pulvinar molestie sem id blandit. Nunc venenatis interdum mollis...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
     <!-- Editorial Area End -->
 {% endblock content %}
 
 
 {% block vuejs %}
     <script>
-{% comment %} 
+        {% comment %} 
         Vue.filter('truncate_article', function (value, length) {
             if (!value){
                 return ''
@@ -458,7 +252,9 @@
             else{
                 return value
             }
-        }) {% endcomment %}
+        }) 
+        {% endcomment %}
+
 
         // from recent article the most views
         new Vue({
@@ -505,18 +301,12 @@
             el: "#dataArt",
             data:{
                 article: [],
-                textBar: []
             },
             delimiters: ['%{', '}'],
             mounted(){
                 axios.post("http://nannews.herokuapp.com/graphql", {
                     query: `
                         {
-                        recentArticlesTitle{
-                            id
-                            title
-                            datePublication
-                        },
                         recentArticles{
                             id
                             title
@@ -537,44 +327,25 @@
                     ).then((response)=>{
                         console.log(response)
                         this.article = response.data.data?.recentArticles
-                        this.textBar = response.data.data?.recentArticlesTitle
-                        setTimeout(this.refresh_reload, 1500);
-    
                     })
             }
     
         })
 
         new Vue({
-            el: "#section_article_slider",
+            el: "#dataArtTitle",
             data:{
-                popularArticle: [],
-                
+                textBar: [],
             },
             delimiters: ['%{', '}'],
-            directives: {},
-            filters: {
-                truncate_data: function(data,num){
-                    let value = he.decode(data)
-                    const reqdString = 
-                    value.split("").slice(0, num).join("") + '...';
-                    return reqdString;
-                },
-            },
             mounted(){
                 axios.post("http://nannews.herokuapp.com/graphql", {
                     query: `
                         {
-                        recentArticles{
+                        recentArticlesTitle{
                             id
                             title
-                            picture
-                            description
                             datePublication
-                            category{
-                                id
-                                name
-                            }
                         }
                     }`
                     }, 
@@ -585,10 +356,17 @@
                     }
                     ).then((response)=>{
                         console.log(response)
-                        this.popularArticle = response.data.data?.recentArticles
+                        this.textBar = response.data.data?.recentArticlesTitle
+                        setTimeout(this.refresh_reload, 1500);
+    
                     })
             }
+    
         })
+
+
+
+        //-------------------
     
     //---------------the differents article in the slider---------------
 
@@ -646,6 +424,15 @@
                 populaire_articles: [],
             },
             delimiters: ['%{', '}'],
+            directives: {},
+            filters: {
+                truncate_data: function(data,num){
+                    let value = he.decode(data)
+                    const reqdString = 
+                    value.split("").slice(0, num).join("") + '...';
+                    return reqdString;
+                }
+            },
             mounted(){
                 axios.post("http://nannews.herokuapp.com/graphql", {
                     query: `
@@ -873,7 +660,7 @@
             },
 
           },
-          delimiters: ['%{', '}']
+          delimiters: ['%{', '}'],
         }
       )
 

@@ -769,9 +769,9 @@ img {
 .dont-miss-post-thumb {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 70px;
-            flex: 0 0 70px;
-    max-width: 70px;
-    margin-right: 30px;
+            flex: 0 0 100px;
+    max-width: 100px;
+    margin-right: 20px;
 }
 
 .dont-miss-post-content {

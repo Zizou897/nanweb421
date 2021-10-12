@@ -134,26 +134,7 @@
             <div class="container">
                 <div class="row">
                     <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <div class="single-footer-widget">
-                            <div class="footer-widget-title">
-                                <h4 class="font-pt">Regions</h4>
-                            </div>
-                            <ul class="footer-widget-menu">
-                                <li><a href="#">U.S.</a></li>
-                                <li><a href="#">Africa</a></li>
-                                <li><a href="#">Americas</a></li>
-                                <li><a href="#">Asia</a></li>
-                                <li><a href="#">China</a></li>
-                                <li><a href="#">Europe</a></li>
-                                <li><a href="#">Middle</a></li>
-                                <li><a href="#">East</a></li>
-                                <li><a href="#">Opinion</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                    {% comment %} <div class="col-12 col-sm-6 col-md-4 col-lg-2">
                         <div class="single-footer-widget">
                             <div class="footer-widget-title">
                                 <h4 class="font-pt">Fashion</h4>
@@ -165,9 +146,9 @@
                                 <li><a href="#">Our Team</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                    {% comment %} <div class="col-12 col-sm-6 col-md-4 col-lg-2">
                         <div class="single-footer-widget">
                             <div class="footer-widget-title">
                                 <h4 class="font-pt">Politics</h4>
@@ -179,9 +160,9 @@
                                 <li><a href="#">Luxury</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                    {% comment %} <div class="col-12 col-sm-6 col-md-4 col-lg-2">
                         <div class="single-footer-widget">
                             <div class="footer-widget-title">
                                 <h4 class="font-pt">Featured</h4>
@@ -197,38 +178,17 @@
                                 <li><a href="#">Skiing</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     <!-- Single Footer Widget -->
                     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
                         <div class="single-footer-widget">
                             <div class="footer-widget-title">
-                                <h4 class="font-pt">FAQ</h4>
+                                <h4 class="font-pt">+Plus</h4>
                             </div>
                             <ul class="footer-widget-menu">
-                                <li><a href="#">Aviation</a></li>
-                                <li><a href="#">Business</a></li>
-                                <li><a href="#">Traveller</a></li>
-                                <li><a href="#">Destinations</a></li>
-                                <li><a href="#">Features</a></li>
-                                <li><a href="#">Food/Drink</a></li>
-                                <li><a href="#">Hotels</a></li>
-                                <li><a href="#">Partner Hotels</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <div class="single-footer-widget">
-                            <div class="footer-widget-title">
-                                <h4 class="font-pt">+More</h4>
-                            </div>
-                            <ul class="footer-widget-menu">
-                                <li><a href="#">Fashion</a></li>
-                                <li><a href="#">Design</a></li>
-                                <li><a href="#">Architecture</a></li>
-                                <li><a href="#">Arts</a></li>
-                                <li><a href="#">Autos</a></li>
-                                <li><a href="#">Luxury</a></li>
+                                <li><a href="{% url 'about' %}">About</a></li>
+                                <li><a href="{% url 'contact' %}">Contact</a></li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -271,7 +231,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="{% static 'assets/js/axios.js' %}"></script>
-    {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> {% endcomment %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     {% block scripts %}

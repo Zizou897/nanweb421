@@ -47,7 +47,7 @@
                             <div class="single-team-area">
                                 <img src="{{team.image.url}}" alt="">
                                 <div class="team-member-data">
-                                    <h4 class="font-pt">{{team.nom}} {{team.nom}}</h4>
+                                    <h4 class="font-pt">{{team.nom}} {{team.prenom}}</h4>
                                     <div class="team-member-designation-social-info d-flex align-items-cente justify-content-between">
                                         <h5 class="font-pt mb-0">{{team.job}}</h5>
                                         <div class="social-info">
@@ -60,62 +60,6 @@
                             </div>
                         </div>
                     {% endfor %}
-                    
-
-                    {% comment %} <div class="col-12 col-sm-6 col-md-3">
-                        <div class="single-team-area">
-                            <img src="{% static 'assets/img/bg-img/t2.jpg' %}" alt="">
-                            <div class="team-member-data">
-                                <h4 class="font-pt">Jane Doe</h4>
-                                <div class="team-member-designation-social-info d-flex align-items-cente justify-content-between">
-                                    <h5 class="font-pt mb-0">Editor</h5>
-                                    <div class="social-info">
-                                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="single-team-area">
-                            <img src="{% static 'assets/img/bg-img/t3.jpg' %}" alt="">
-                            <div class="team-member-data">
-                                <h4 class="font-pt">Jane Doe</h4>
-                                <div class="team-member-designation-social-info d-flex align-items-cente justify-content-between">
-                                    <h5 class="font-pt mb-0">Editor</h5>
-                                    <div class="social-info">
-                                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="single-team-area">
-                            <img src="{% static 'assets/img/bg-img/t4.jpg' %}" alt="">
-                            <div class="team-member-data">
-                                <h4 class="font-pt">Jane Doe</h4>
-                                <div class="team-member-designation-social-info d-flex align-items-cente justify-content-between">
-                                    <h5 class="font-pt mb-0">Editor</h5>
-                                    <div class="social-info">
-                                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> {% endcomment %}
-
-
                 </div>
             </div>
         </div>
@@ -135,23 +79,3 @@
         </div>
     </section>
 {% endblock content %}
-
-<script>
-
-$('.owl-carousel').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:3
-        },
-        1000:{
-            items:5
-        }
-    }
-})
-</script>
