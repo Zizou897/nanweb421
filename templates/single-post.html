@@ -3,61 +3,101 @@
 {% block content %}
 
 
-    <section class="single-post-area">
+    <section id="detailApp" class="single-post-area">
         <!-- Single Post Title -->
-        <div class="single-post-title bg-img background-overlay" style="background-image: url({% static 'asstes/img/bg-img/1.jpg' %});">
+        <div v-for="detail in article_detail" v-if="detail.id == {{idt}}" class="single-post-title bg-img background-overlay" :style="{ backgroundImage: 'url(' + detail.picture + ')' }">
             <div class="container h-100">
                 <div class="row h-100 align-items-end">
                     <div class="col-12">
                         <div class="single-post-title-content">
                             <!-- Post Tag -->
                             <div class="gazette-post-tag">
-                                <a href="#">Editorial ID {{idt}}</a>
+                                <a href="#">%{detail.category.name}</a>
                             </div>
-                            <h2 class="font-pt">Move over, bitcoin.Here comes litecoin</h2>
-                            <p>March 29, 2016</p>
+                            <h2 class="font-pt">%{detail.title}</h2>
+                            <p>%{detail.datePublication}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="single-post-contents">
+        <div v-for="detail in article_detail" v-if="detail.id == {{idt}}" class="single-post-contents">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-8">
                         <div class="single-post-text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum nunc libero, vitae rutrum nunc porta id. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam arcu augue, semper at elementum</p>
-                            <p>nec, cursus nec ante. Vestibulum sed velit scelerisque elit posuere vulputate vel viverra quam. Curabitur laoreet aliquam diam, non mattis arcu feugiat sed. Sed eget pellentesque lacus. Pellentesque in diam vel mauris pretium commodo a ac magna. Suspendisse scelerisque tellus convallis tortor posuere, ut commodo diam blandit. Morbi vel nulla non turpis luctus tempor eu eu urna. Aliquam in lorem a augue mollis volutpat. Nunc iaculis rutrum enim nec viverra. Morbi eleifend metus id tellus luctus, ac porta orci imperdiet.</p>
-                            <p>Morbi efficitur ligula a efficitur mollis. Suspendisse vitae sapien vitae urna eleifend dapibus ut non tortor. In nec metus ac mi ultrices commodo interdum et lacus. Suspendisse potenti. Suspendisse interdum semper dolor nec posuere. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut orci non tortor pretium hendrerit at vel massa. Nunc ut fermentum felis.</p>
+                            <p v-html="detail.description"></p>
                         </div>
                     </div>
-                    <div class="col-12">
+                    {% comment %} <div class="col-12">
                         <div class="single-post-thumb">
                             <img src="{% static 'assets/img/blog-img/24.jpg' %}" alt="">
                         </div>
-                    </div>
-                    <div class="col-12 col-md-8">
+                    </div> {% endcomment %}
+                    {% comment %} <div class="col-12 col-md-8">
                         <div class="single-post-text">
                             <p>Suspendisse scelerisque tellus convallis tortor posuere, ut commodo diam blandit. Morbi vel nulla non turpis luctus tempor eu eu urna. Aliquam in lorem a augue mollis volutpat. Nunc iaculis rutrum enim nec viverra. Morbi eleifend metus id tellus luctus, ac porta orci imperdiet.</p>
                             <p>Morbi efficitur ligula a efficitur mollis. Suspendisse vitae sapien vitae urna eleifend dapibus ut non tortor. In nec metus ac mi ultrices commodo interdum et lacus. Suspendisse potenti. Suspendisse interdum semper dolor nec posuere. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut orci non tortor pretium hendrerit at vel massa. Nunc ut fermentum felis. </p>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-10">
+                    </div> {% endcomment %}
+                    {% comment %} <div class="col-12 col-md-10">
                         <div class="single-post-blockquote">
                             <blockquote>
                                 <h6 class="font-pt mb-0">“Vestibulum nulla diam, sodales sit amet erat vel, mollis iaculis lectus. Suspendisse in rhoncus est. Sed aliquet mauris in efficitur tempor. Proin enim felis, laoreet id viverra at”</h6>
                             </blockquote>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-8">
+                    </div> {% endcomment %}
+                    {% comment %} <div class="col-12 col-md-8">
                         <div class="single-post-text">
                             <p>Suspendisse vitae sapien vitae urna eleifend dapibus ut non tortor. In nec metus ac mi ultrices commodo interdum et lacus. Suspendisse potenti. Suspendisse interdum semper dolor nec posuere. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut orci non tortor pretium hendrerit at vel massa. Nunc ut fermentum felis.</p>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
             </div>
         </div>
     </section>
 
 {% endblock content %}
+
+{% block detail %}
+
+    <script>
+        new Vue({
+            el:"#detailApp",
+            data: {
+                article_detail: []
+            },
+            delimiters: ['%{','}'],
+            mounted(){
+                axios.post("https://nannews.herokuapp.com/graphql",{
+                    query:`{
+                        allArticles{
+                            id
+                            title
+                            picture
+                            description
+                            datePublication
+                            category{
+                                id
+                                name
+                            }
+                        }
+                    }`
+                    },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                ).then((response)=> {
+                    console.log(this.article_detail = response.data.data?.allArticles)
+                    this.article_detail = response.data.data?.allArticles
+                })
+
+            }
+        })
+
+    </script>
+
+{% endblock detail %}

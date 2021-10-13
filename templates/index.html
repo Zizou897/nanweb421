@@ -82,7 +82,7 @@
                                 <div class="gazette-post-tag">
                                     <a href="{% url 'catagory' %}">%{pop1.category.name}</a>
                                 </div>
-                                <h3><a href="{% url 'detail' %}" class="font-pt mb-2">%{pop1.title}</a></h3>
+                                <h3><a :href=" 'detail/' + pop1.id + '/' " class="font-pt mb-2">%{pop1.title}</a></h3>
                                 <span class="gazette-post-date mb-2">%{pop1.datePublication}</span>
                                 
                                 <p v-html="$options.filters.truncate_data(pop1.description, 200)"></p>
@@ -150,7 +150,7 @@
                         <!-- Subscribe Widget -->
                         <div class="subscribe-widget">
                             <div class="widget-title">
-                                <h5>subscribe</h5>
+                                <h5>s'abonner</h5>
                             </div>
                             <div id="register" class="subscribe-form">
                                 <form action="#">
@@ -181,7 +181,7 @@
                                 <div v-if="index == 0" class="gazette-post-tag">
                                     <a href="#">%{tit_art.category.name}</a>
                                 </div>
-                                <h5><a href="#" class="font-pt">%{tit_art.title}</a></h5>
+                                <h5><a :href="'detail/' + tit_art.id + '/' " class="font-pt">%{tit_art.title}</a></h5>
                                 <span>%{tit_art.datePublication}</span>
                             </div>
                         </div>       
@@ -199,7 +199,7 @@
                                         <div class="gazette-post-tag">
                                             <a href="#">%{autre.category.name}</a>
                                         </div>
-                                        <h5><a href="#" class="font-pt">%{autre.title}</a></h5>
+                                        <h5><a :href="'detail/' + autre.id + '/' " class="font-pt">%{autre.title}</a></h5>
                                         <span>%{autre.datePublication}</span>
                                     </div>
                                 </div>
@@ -217,7 +217,7 @@
                                 <div v-if="index == 0" class="gazette-post-tag">
                                     <a href="#">%{title_art.category.name}</a>
                                 </div>
-                                <h5><a href="#" class="font-pt">%{title_art.title}</a></h5>
+                                <h5><a :href=" 'detail/' + title_art.id + '/' " class="font-pt">%{title_art.title}</a></h5>
                                 <span>%{title_art.datePublication}</span>
                             </div>
                         </div>
