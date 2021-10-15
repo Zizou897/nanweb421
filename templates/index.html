@@ -6,20 +6,18 @@
     <div >
         <section id="dataArt" class="welcome-blog-post-slide">
             <!-- Single Blog Post -->          
-            <!-- Single Blog Post -->
-            <div  v-for="art in article" class="single-blog-post-slide bg-img background-overlay-5" :style="{ backgroundImage: 'url(' + art.picture + ')' }">
+            <div  v-for="art in article" class="single-blog-post-slide bg-img background-overlay-5 slider-div"  :style="{ backgroundImage: 'url(' + art.picture + ')' }">
                 <!-- Single Blog Post Content -->
                 <div class="single-blog-post-content">
                     <div class="tags">
                         <a href="{% url 'catagory' %}">%{art.category.name}</a>
                     </div>
-                    <h3><a href="{% url 'detail' %}" class="font-pt">%{art.title}</a></h3>
+                    <h3><a :href="'/detail/' + art.id + '/' " class="font-pt">%{art.title}</a></h3>
                     <div class="date">
                         <a href="#">%{art.id}</a>
                     </div>
                 </div>
             </div>
-            <!-- Single Blog Post -->
             <!-- Single Blog Post -->
         </section>
         <!-- Welcome Blog Slide Area End -->
@@ -239,6 +237,7 @@
 
 
 {% block vuejs %}
+
     <script>
         {% comment %} 
         Vue.filter('truncate_article', function (value, length) {
