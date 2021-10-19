@@ -227,7 +227,7 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <script src="{% static 'assets/js/axios.js' %}"></script>
+    {% comment %} <script src="{% static 'assets/js/axios.js' %}"></script> {% endcomment %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -240,21 +240,28 @@
     {% endblock scripts %}
 
 
-   {% comment %} Email and contact confirm {% endcomment %}
-
+{% comment %} Email and contact confirm {% endcomment %}
 
     {% block vuejs %}
         
     {% endblock vuejs %}
+{% comment %} ---------------------------- {% endcomment %}
+
+
+
+{% comment %}  bolck for detail {% endcomment %}
 
     {% block detail %}
         
     {% endblock detail %}
-    
+{% comment %} ---------------------------- {% endcomment %}
+
+{% comment %}  bolck for category article {% endcomment %}
     {% block allCategorie %}
         
     {% endblock allCategorie %}
 
+{% comment %} ---------------------------- {% endcomment %}
 
 {% comment %} Diferents category in menu {% endcomment %}
     <script>
@@ -291,7 +298,7 @@
     
         })
     </script>
-{% comment %} Diferents category in menu {% endcomment %}
+{% comment %} ---------------------------- {% endcomment %}
    
 </div>
 </body>

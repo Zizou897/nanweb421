@@ -28,158 +28,36 @@
 
     <section class="catagory-welcome-post-area section_padding_100">
         <div class="container">
-            <div id="categorie" class="row">
+            <div id="categorie_ART" class="row">
 
                 <div v-if="loading" class='modal-loader'>
                     <div  v-if="loading" class="lds-ripple"><div></div><div></div></div>
                 </div>
-
-                <div v-for=" cat in categorie_article.slice(0,9)" v-if="cat.category.slug == {{slug}}" class="col-12 col-md-4">
-                    <!-- Gazette Welcome Post -->
-                    <div class="gazette-welcome-post">
-                        <!-- Post Tag -->
-                        <div class="gazette-post-tag">
-                            <a href="#">%{cat.category.slug}</a>
-                        </div>
-                        <h2 class="font-pt">%{cat.title}</h2>
-                        <p class="gazette-post-date">%{cat.datePublicaion}</p>
-                        <!-- Post Thumbnail -->
-                        <div class="blog-post-thumbnail my-5">
-                            <img src="{% static 'assets/img/blog-img/18.jpg' %}" alt="post-thumb">
-                        </div>
-                        <!-- Post Excerpt -->
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend.</p>
-                        <!-- Reading More -->
-                        <div class="post-continue-reading-share mt-30">
-                            <div class="post-continue-btn">
-                                <a href="#" class="font-pt">Continue Reading <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% comment %} <div class="col-12 col-md-4">
-                    <!-- Gazette Welcome Post -->
-                    <div class="gazette-welcome-post">
-                        <!-- Post Tag -->
-                        <div class="gazette-post-tag">
-                            <a href="#">Politices</a>
-                        </div>
-                        <h2 class="font-pt">Report: Hundreds of EPA employees leave</h2>
-                        <p class="gazette-post-date">March 29, 2016</p>
-                        <!-- Post Thumbnail -->
-                        <div class="blog-post-thumbnail my-5">
-                            <img src="{% static 'assets/img/blog-img/19.jpg' %}" alt="post-thumb">
-                        </div>
-                        <!-- Post Excerpt -->
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend.</p>
-                        <!-- Reading More -->
-                        <div class="post-continue-reading-share mt-30">
-                            <div class="post-continue-btn">
-                                <a href="#" class="font-pt">Continue Reading <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <!-- Gazette Welcome Post -->
-                    <div class="gazette-welcome-post">
-                        <!-- Post Tag -->
-                        <div class="gazette-post-tag">
-                            <a href="#">Politices</a>
-                        </div>
-                        <h2 class="font-pt">Judge throws out ethics case against Trump</h2>
-                        <p class="gazette-post-date">March 29, 2016</p>
-                        <!-- Post Thumbnail -->
-                        <div class="blog-post-thumbnail my-5">
-                            <img src="{% static 'assets/img/blog-img/20.jpg' %}" alt="post-thumb">
-                        </div>
-                        <!-- Post Excerpt -->
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend.</p>
-                        <!-- Reading More -->
-                        <div class="post-continue-reading-share mt-30">
-                            <div class="post-continue-btn">
-                                <a href="#" class="font-pt">Continue Reading <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div> {% endcomment %}
-
-
-
-                {% comment %} <div class="col-12 col-md-6">
-                    <!-- Gazette Welcome Post -->
-                    <div class="gazette-welcome-post">
-                        <!-- Post Tag -->
-                        <div class="gazette-post-tag">
-                            <a href="#">Politices</a>
-                        </div>
-                        <h2 class="font-pt">WaPo: FBI general counsel being reassigned</h2>
-                        <p class="gazette-post-date">March 29, 2016</p>
-                        <!-- Post Thumbnail -->
-                        <div class="blog-post-thumbnail my-5">
-                            <img src="{% static 'assets/img/blog-img/21.jpg' %}" alt="post-thumb">
-                        </div>
-                        <!-- Post Excerpt -->
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend.</p>
-                        <!-- Reading More -->
-                        <div class="post-continue-reading-share mt-30">
-                            <div class="post-continue-btn">
-                                <a href="#" class="font-pt">Continue Reading <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <!-- Gazette Welcome Post -->
-                    <div class="gazette-welcome-post">
-                        <!-- Post Tag -->
-                        <div class="gazette-post-tag">
-                            <a href="#">Politices</a>
-                        </div>
-                        <h2 class="font-pt">What's behind the world obsession with gems?</h2>
-                        <p class="gazette-post-date">March 29, 2016</p>
-                        <!-- Post Thumbnail -->
-                        <div class="blog-post-thumbnail my-5">
-                            <img src="{% static 'assets/img/blog-img/22.jpg' %}" alt="post-thumb">
-                        </div>
-                        <!-- Post Excerpt -->
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend.</p>
-                        <!-- Reading More -->
-                        <div class="post-continue-reading-share mt-30">
-                            <div class="post-continue-btn">
-                                <a href="#" class="font-pt">Continue Reading <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div> {% endcomment %}
-
-
-
-                {% comment %} <div class="col-12">
-                    <!-- Gazette Welcome Post -->
-                    <div class="gazette-welcome-post d-md-flex align-items-center">
-                        <!-- Post Thumbnail -->
-                        <div class="blog-post-thumbnail">
-                            <img src="{% static 'assets/img/blog-img/23.jpg' %}" alt="post-thumb">
-                        </div>
-                        <div class="welcome-post-contents ml-30">
+                
+                    <div v-else v-for="article in categorie_article" class="col-12 col-md-4">
+                        <!-- Gazette Welcome Post -->
+                        <div class="gazette-welcome-post">
                             <!-- Post Tag -->
                             <div class="gazette-post-tag">
-                                <a href="#">Politices</a>
+                                <a href="#">%{article.category.name}</a>
                             </div>
-                            <h2 class="font-pt">Justice Department rolls guidance on fining poor defendants </h2>
-                            <p class="gazette-post-date mb-15">March 29, 2016</p>
+                            <h2 class="font-pt">%{$options.filters.truncate_data(article.title, 40)}</h2>
+                            <p class="gazette-post-date">%{article.datePublicaion}</p>
+                            <!-- Post Thumbnail -->
+                            <div class="blog-post-thumbnail my-5">
+                                <img :src=" article.picture" alt="post-thumb">
+                            </div>
                             <!-- Post Excerpt -->
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend.</p>
+                            <p v-html="$options.filters.truncate_data(article.description, 190)"></p>
                             <!-- Reading More -->
-                            <div class="post-continue-reading-share mt-15">
+                            <div class="post-continue-reading-share mt-30">
                                 <div class="post-continue-btn">
-                                    <a href="#" class="font-pt">Continue Reading <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                                    <a :href="'/detail/' + article.id + '/'" class="font-pt">Lire Plus <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> {% endcomment %}
+                
             </div>
         </div>
     </section>
@@ -191,7 +69,7 @@
     <script>
 
         new Vue({
-            el: "#categorie",
+            el: "#categorie_ART",
             data:{
                 categorie_article: [],
                 loading: true,
@@ -210,16 +88,20 @@
                 axios.post("http://nannews.herokuapp.com/graphql", {
                     query: `
                         {
-                        allArticles{
+                        categoryBySlug(slug: "{{slug}}"){
+                            name
                             id
-                            title
-                            picture
-                            description
-                            datePublication
-                            category{
+                            slug
+                            categoryArticle{
                                 id
-                                name
+                                title
                                 slug
+                                picture
+                                description
+                                datePublication
+                                category {
+                                    name
+                                }
                             }
                         }
                     }`
@@ -231,8 +113,9 @@
                     }
                     ).then((response)=>{
                         console.log(response)
-                        this.categorie_article = response.data.data?.allArticles
-                    })
+                        this.categorie_article = response.data.data?.categoryBySlug?.categoryArticle
+                        console.log(this.categorie_article)
+                    }).finally(()=> this.loading = false)
             }
         })
 

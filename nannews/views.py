@@ -16,6 +16,12 @@ def catagory(request,slug=None):
     return render(request, "catagory.html", locals())
 
 
+def search(request,word=None):
+    site_web = models.Site.objects.filter(status=True).first()
+    return render(request, "search.html", locals())
+
+
+
 def about(request):
     site_web = models.Site.objects.filter(status=True).first()
     teams = models.Team.objects.filter(status = True)

@@ -29,6 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["https://nanweb.herokuapp.com/", "*"]
 
+X_FRAME_OPTIONS = "SAMEORIGIN"
+
 
 # Application definition
 
