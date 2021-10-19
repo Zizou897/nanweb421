@@ -11,7 +11,7 @@
                     <div class="breacumb-content d-flex align-items-center justify-content-between">
                         <!-- Post Tag -->
                         <div class="gazette-post-tag">
-                            <a href="{% url 'catagory' %}">politics</a>
+                            <a href="{% url 'catagory' %}">{{slug}}</a>
                         </div>
                         {% language 'fr' %}
                             <p class="editorial-post-date text-dark mb-0">{% now "j F Y" %}</p>
@@ -23,119 +23,26 @@
     </div>
     <!-- Breadcumb Area End -->
 
-    <!-- Editorial Area Start -->
-    <section class="gazatte-editorial-area section_padding_100 bg-dark">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="editorial-post-slides owl-carousel">
-
-                        <!-- Editorial Post Single Slide -->
-                        <div class="editorial-post-single-slide">
-                            <div class="row">
-                                <div class="col-12 col-md-5">
-                                    <div class="editorial-post-thumb">
-                                        <img src="{% static 'assets/img/blog-img/bitcoin.jpg' %}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-7">
-                                    <div class="editorial-post-content">
-                                        <!-- Post Tag -->
-                                        <div class="gazette-post-tag">
-                                            <a href="{% url 'catagory' %}">Editorial</a>
-                                        </div>
-                                        <h2><a href="#" class="font-pt mb-15">Move over, bitcoin. <br>Here comes litecoin</a></h2>
-                                        <p class="editorial-post-date mb-15">March 29, 2016</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend. Nullam viverra tincidunt dolor, at pulvinar dui. Nullam at risus ut ipsum viverra posuere. Aliquam quis convallis enim. Nunc pulvinar molestie sem id blandit. Nunc venenatis interdum mollis...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Editorial Post Single Slide -->
-                        <div class="editorial-post-single-slide">
-                            <div class="row">
-                                <div class="col-12 col-md-5">
-                                    <div class="editorial-post-thumb">
-                                        <img src="{% static 'assets/img/blog-img/bitcoin.jpg' %}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-7">
-                                    <div class="editorial-post-content">
-                                        <!-- Post Tag -->
-                                        <div class="gazette-post-tag">
-                                            <a href="{% url 'catagory' %}">Editorial</a>
-                                        </div>
-                                        <h2><a href="#" class="font-pt mb-15">Move over, bitcoin. <br>Here comes litecoin</a></h2>
-                                        <p class="editorial-post-date mb-15">March 29, 2016</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend. Nullam viverra tincidunt dolor, at pulvinar dui. Nullam at risus ut ipsum viverra posuere. Aliquam quis convallis enim. Nunc pulvinar molestie sem id blandit. Nunc venenatis interdum mollis...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Editorial Post Single Slide -->
-                        <div class="editorial-post-single-slide">
-                            <div class="row">
-                                <div class="col-12 col-md-5">
-                                    <div class="editorial-post-thumb">
-                                        <img src="{% static 'assets/img/blog-img/bitcoin.jpg' %}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-7">
-                                    <div class="editorial-post-content">
-                                        <!-- Post Tag -->
-                                        <div class="gazette-post-tag">
-                                            <a href="{% url 'catagory' %}">Editorial</a>
-                                        </div>
-                                        <h2><a href="#" class="font-pt mb-15">Move over, bitcoin. <br>Here comes litecoin</a></h2>
-                                        <p class="editorial-post-date mb-15">March 29, 2016</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend. Nullam viverra tincidunt dolor, at pulvinar dui. Nullam at risus ut ipsum viverra posuere. Aliquam quis convallis enim. Nunc pulvinar molestie sem id blandit. Nunc venenatis interdum mollis...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Editorial Post Single Slide -->
-                        <div class="editorial-post-single-slide">
-                            <div class="row">
-                                <div class="col-12 col-md-5">
-                                    <div class="editorial-post-thumb">
-                                        <img src="{% static 'assets/img/blog-img/bitcoin.jpg' %}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-7">
-                                    <div class="editorial-post-content">
-                                        <!-- Post Tag -->
-                                        <div class="gazette-post-tag">
-                                            <a href="{% url 'catagory' %}">Editorial</a>
-                                        </div>
-                                        <h2><a href="#" class="font-pt mb-15">Move over, bitcoin. <br>Here comes litecoin</a></h2>
-                                        <p class="editorial-post-date mb-15">March 29, 2016</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend. Nullam viverra tincidunt dolor, at pulvinar dui. Nullam at risus ut ipsum viverra posuere. Aliquam quis convallis enim. Nunc pulvinar molestie sem id blandit. Nunc venenatis interdum mollis...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+   
     <!-- Editorial Area End -->
 
     <section class="catagory-welcome-post-area section_padding_100">
         <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-4">
+            <div id="categorie" class="row">
+
+                <div v-if="loading" class='modal-loader'>
+                    <div  v-if="loading" class="lds-ripple"><div></div><div></div></div>
+                </div>
+
+                <div v-for=" cat in categorie_article.slice(0,9)" v-if="cat.category.slug == {{slug}}" class="col-12 col-md-4">
                     <!-- Gazette Welcome Post -->
                     <div class="gazette-welcome-post">
                         <!-- Post Tag -->
                         <div class="gazette-post-tag">
-                            <a href="#">Politices</a>
+                            <a href="#">%{cat.category.slug}</a>
                         </div>
-                        <h2 class="font-pt">The fine print of Trump's tax talking points</h2>
-                        <p class="gazette-post-date">March 29, 2016</p>
+                        <h2 class="font-pt">%{cat.title}</h2>
+                        <p class="gazette-post-date">%{cat.datePublicaion}</p>
                         <!-- Post Thumbnail -->
                         <div class="blog-post-thumbnail my-5">
                             <img src="{% static 'assets/img/blog-img/18.jpg' %}" alt="post-thumb">
@@ -150,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4">
+                {% comment %} <div class="col-12 col-md-4">
                     <!-- Gazette Welcome Post -->
                     <div class="gazette-welcome-post">
                         <!-- Post Tag -->
@@ -195,8 +102,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-6">
+                </div> {% endcomment %}
+
+
+
+                {% comment %} <div class="col-12 col-md-6">
                     <!-- Gazette Welcome Post -->
                     <div class="gazette-welcome-post">
                         <!-- Post Tag -->
@@ -241,8 +151,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12">
+                </div> {% endcomment %}
+
+
+
+                {% comment %} <div class="col-12">
                     <!-- Gazette Welcome Post -->
                     <div class="gazette-welcome-post d-md-flex align-items-center">
                         <!-- Post Thumbnail -->
@@ -266,27 +179,63 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="gazette-pagination-area">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next"><i class="fa fa-angle-right"></i></a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
     </section>
 {% endblock content %}
+
+
+
+{% block allCategorie%}
+    <script>
+
+        new Vue({
+            el: "#categorie",
+            data:{
+                categorie_article: [],
+                loading: true,
+            },
+            delimiters: ['%{', '}'],
+            directives: {},
+            filters: {
+                truncate_data: function(data,num){
+                    let value = he.decode(data)
+                    const reqdString = 
+                    value.split("").slice(0, num).join("") + '...';
+                    return reqdString;
+                },
+            },
+            mounted(){
+                axios.post("http://nannews.herokuapp.com/graphql", {
+                    query: `
+                        {
+                        allArticles{
+                            id
+                            title
+                            picture
+                            description
+                            datePublication
+                            category{
+                                id
+                                name
+                                slug
+                            }
+                        }
+                    }`
+                    }, 
+                    {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                    ).then((response)=>{
+                        console.log(response)
+                        this.categorie_article = response.data.data?.allArticles
+                    })
+            }
+        })
+
+    </script>
+
+{% endblock allCategorie%}

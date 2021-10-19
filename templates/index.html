@@ -14,7 +14,7 @@
                     </div>
                     <h3><a :href="'/detail/' + art.id + '/' " class="font-pt">%{art.title}</a></h3>
                     <div class="date">
-                        <a href="#">%{art.id}</a>
+                        <a href="#">%{art.datePublication}</a>
                     </div>
                 </div>
             </div>
@@ -311,6 +311,7 @@
                             title
                             picture
                             description
+                            datePublication
                             category{
                                 id
                                 name

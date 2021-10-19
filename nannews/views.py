@@ -11,7 +11,7 @@ def index(request):
     return render(request, "index.html", locals())
 
 
-def catagory(request,cat=None):
+def catagory(request,slug=None):
     site_web = models.Site.objects.filter(status=True).first()
     return render(request, "catagory.html", locals())
 

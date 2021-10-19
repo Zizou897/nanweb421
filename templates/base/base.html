@@ -20,7 +20,7 @@
 
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/core-style2.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/style1.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/style.css' %}">
 
     <!-- Responsive CSS -->
     <link href="{% static 'assets/css/responsive.css' %}" rel="stylesheet">
@@ -64,17 +64,13 @@
                                         <li class="nav-item active">
                                             <a class="nav-link" href="{% url 'index' %}">Accueil <span class="sr-only">(current)</span></a>
                                         </li>
-                                        <li v-for="(cat, index) in categorie" class="nav-item">
-                                            <a v-if="cat.name.length< 10 && index < 17" class="nav-link" href="{% url 'catagory' %}">%{cat.name}</a>
+                                        <li v-for="(cat, index) in categorie.slice(0,6)" class="nav-item">
+                                            <a  class="nav-link" :href=" '/catagory/'+ cat.slug + '/' ">%{cat.name}</a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Autres</a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="index.html">Politics</a>
-                                                <a class="dropdown-item" href="catagory.html">Sport</a>
-                                                <a class="dropdown-item" href="single-post.html">Culture</a>
-                                                <a class="dropdown-item" href="about-us.html">Débat</a>
-                                                <a class="dropdown-item" href="contact.html">Santé</a>
+                                                <a  v-for="(cati, index) in categorie.slice(6,12)" class="dropdown-item" :href=" '/catagory/'+ cati.slug + '/' ">%{cati.name}</a>
                                             </div>
                                         </li>
                                         {% comment %} <li class="nav-item">
@@ -254,7 +250,12 @@
     {% block detail %}
         
     {% endblock detail %}
-  
+    
+    {% block allCategorie %}
+        
+    {% endblock allCategorie %}
+
+
 {% comment %} Diferents category in menu {% endcomment %}
     <script>
         new Vue({
@@ -270,6 +271,7 @@
                         category{
                             id
                             name
+                            slug
                         },
                         
                     }`
