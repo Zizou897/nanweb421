@@ -72,22 +72,7 @@
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <a  v-for="(cati, index) in categorie.slice(6,12)" class="dropdown-item" :href=" '/catagory/'+ cati.slug + '/' ">%{cati.name}</a>
                                             </div>
-                                        </li>
-                                        {% comment %} <li class="nav-item">
-                                            <a class="nav-link" href="{% url 'catagory' %}">Lifestyle</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{% url 'catagory' %}">Travel</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{% url 'catagory' %}">Health</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{% url 'catagory' %}">Entertainment</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{% url 'catagory' %}">sport</a> {% endcomment %}
-                          
+                                        </li>                          
                                     </ul>
                                     <ul class="navbar-nav mr-auto">
                                         <li class="nav-item personal-link">
@@ -100,8 +85,8 @@
                                     </ul>
                                     <!-- Search Form -->
                                     <div class="header-search-form mr-auto">
-                                        <form action="#">
-                                            <input type="search" placeholder="Input your keyword then press enter..." id="search" name="search">
+                                        <form method="GET" action="{% url 'search' %}">
+                                            <input type="search" placeholder="Saisissez votre mot-clé puis appuyez sur Entrée..." id="search" name="q">
                                             <input class="d-none" type="submit" value="submit">
                                         </form>
                                     </div>
@@ -131,52 +116,6 @@
             <div class="container">
                 <div class="row">
                     <!-- Single Footer Widget -->
-                    {% comment %} <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <div class="single-footer-widget">
-                            <div class="footer-widget-title">
-                                <h4 class="font-pt">Fashion</h4>
-                            </div>
-                            <ul class="footer-widget-menu">
-                                <li><a href="#">Election 2016</a></li>
-                                <li><a href="#">Nation</a></li>
-                                <li><a href="#">World</a></li>
-                                <li><a href="#">Our Team</a></li>
-                            </ul>
-                        </div>
-                    </div> {% endcomment %}
-                    <!-- Single Footer Widget -->
-                    {% comment %} <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <div class="single-footer-widget">
-                            <div class="footer-widget-title">
-                                <h4 class="font-pt">Politics</h4>
-                            </div>
-                            <ul class="footer-widget-menu">
-                                <li><a href="#">Business</a></li>
-                                <li><a href="#">Markets</a></li>
-                                <li><a href="#">Tech</a></li>
-                                <li><a href="#">Luxury</a></li>
-                            </ul>
-                        </div>
-                    </div> {% endcomment %}
-                    <!-- Single Footer Widget -->
-                    {% comment %} <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <div class="single-footer-widget">
-                            <div class="footer-widget-title">
-                                <h4 class="font-pt">Featured</h4>
-                            </div>
-                            <ul class="footer-widget-menu">
-                                <li><a href="#">Football</a></li>
-                                <li><a href="#">Golf</a></li>
-                                <li><a href="#">Tennis</a></li>
-                                <li><a href="#">Motorsport</a></li>
-                                <li><a href="#">Horseracing</a></li>
-                                <li><a href="#">Equestrian</a></li>
-                                <li><a href="#">Sailing</a></li>
-                                <li><a href="#">Skiing</a></li>
-                            </ul>
-                        </div>
-                    </div> {% endcomment %}
-                    <!-- Single Footer Widget -->
                     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
                         <div class="single-footer-widget">
                             <div class="footer-widget-title">
@@ -201,8 +140,7 @@
                         <div class="copywrite-text">
                             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 {{site_web.copy_ryght|safe}}
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </p>
+                            </p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </div>
                     </div>
                 </div>
@@ -263,6 +201,13 @@
 
 {% comment %} ---------------------------- {% endcomment %}
 
+
+{% comment %}  bolck for search {% endcomment %}
+{% block search %}
+
+{% endblock search %}
+{% comment %} ---------------------------- {% endcomment %}
+
 {% comment %} Diferents category in menu {% endcomment %}
     <script>
         new Vue({
@@ -297,6 +242,7 @@
             }
     
         })
+
     </script>
 {% comment %} ---------------------------- {% endcomment %}
    

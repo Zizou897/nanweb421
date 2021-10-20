@@ -16,16 +16,19 @@ def catagory(request,slug=None):
     return render(request, "catagory.html", locals())
 
 
-def search(request,word=None):
+@csrf_exempt
+def search(request):
     site_web = models.Site.objects.filter(status=True).first()
-    return render(request, "search.html", locals())
 
+    if 'q' in request.GET:
+        q = request.GET["q"]
+        return render(request, "search.html", locals())
 
 
 def about(request):
     site_web = models.Site.objects.filter(status=True).first()
     teams = models.Team.objects.filter(status = True)
-    configuration = models.Config.objects.filter(status=True).first(    )
+    configuration = models.Config.objects.filter(status=True).first()
     return render(request, "about-us.html", locals())
 
 

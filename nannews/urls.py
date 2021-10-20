@@ -5,7 +5,6 @@ from django.urls import path
 urlpatterns = [
     path("", views.index, name="index"),
     path("search/", views.search, name="search"),
-    path("search/<str:word>/", views.search, name="search"),
     path("catagory/", views.catagory, name="catagory"),
     path("catagory/<str:slug>/", views.catagory, name="catagory"),
     path("contact/", views.contact, name="contact"),

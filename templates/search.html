@@ -11,7 +11,7 @@
                     <div class="breacumb-content d-flex align-items-center justify-content-between">
                         <!-- Post Tag -->
                         <div class="gazette-post-tag searh-results">
-                            <a href="#">Resultats</a>
+                            <a href="#">Resultats {{q}}</a>
                         </div>
                         {% language 'fr' %}
                             <p class="editorial-post-date text-dark mb-0">{% now "j F Y" %}</p>
@@ -23,144 +23,29 @@
     </div>
     <!-- Breadcumb Area End -->
 
-    <section class="catagory-welcome-post-area section_padding_100">
+    <section id ="searchKeyWord" class="catagory-welcome-post-area section_padding_100">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-4">
-                    <!-- Gazette Welcome Post -->
-                    <div class="gazette-welcome-post">
-                        <!-- Post Tag -->
-                        <div class="gazette-post-tag">
-                            <a href="#">Politices</a>
-                        </div>
-                        <h2 class="font-pt">The fine print of Trump's tax talking points</h2>
-                        <p class="gazette-post-date">March 29, 2016</p>
-                        <!-- Post Thumbnail -->
-                        <div class="blog-post-thumbnail my-5">
-                            <img src="{% static 'assets/img/blog-img/18.jpg' %}" alt="post-thumb">
-                        </div>
-                        <!-- Post Excerpt -->
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend.</p>
-                        <!-- Reading More -->
-                        <div class="post-continue-reading-share mt-30">
-                            <div class="post-continue-btn">
-                                <a href="#" class="font-pt">Continue Reading <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <!-- Gazette Welcome Post -->
-                    <div class="gazette-welcome-post">
-                        <!-- Post Tag -->
-                        <div class="gazette-post-tag">
-                            <a href="#">Politices</a>
-                        </div>
-                        <h2 class="font-pt">Report: Hundreds of EPA employees leave</h2>
-                        <p class="gazette-post-date">March 29, 2016</p>
-                        <!-- Post Thumbnail -->
-                        <div class="blog-post-thumbnail my-5">
-                            <img src="{% static 'assets/img/blog-img/19.jpg' %}" alt="post-thumb">
-                        </div>
-                        <!-- Post Excerpt -->
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend.</p>
-                        <!-- Reading More -->
-                        <div class="post-continue-reading-share mt-30">
-                            <div class="post-continue-btn">
-                                <a href="#" class="font-pt">Continue Reading <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <!-- Gazette Welcome Post -->
-                    <div class="gazette-welcome-post">
-                        <!-- Post Tag -->
-                        <div class="gazette-post-tag">
-                            <a href="#">Politices</a>
-                        </div>
-                        <h2 class="font-pt">Judge throws out ethics case against Trump</h2>
-                        <p class="gazette-post-date">March 29, 2016</p>
-                        <!-- Post Thumbnail -->
-                        <div class="blog-post-thumbnail my-5">
-                            <img src="{% static 'assets/img/blog-img/20.jpg' %}" alt="post-thumb">
-                        </div>
-                        <!-- Post Excerpt -->
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend.</p>
-                        <!-- Reading More -->
-                        <div class="post-continue-reading-share mt-30">
-                            <div class="post-continue-btn">
-                                <a href="#" class="font-pt">Continue Reading <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <!-- Gazette Welcome Post -->
-                    <div class="gazette-welcome-post">
-                        <!-- Post Tag -->
-                        <div class="gazette-post-tag">
-                            <a href="#">Politices</a>
-                        </div>
-                        <h2 class="font-pt">WaPo: FBI general counsel being reassigned</h2>
-                        <p class="gazette-post-date">March 29, 2016</p>
-                        <!-- Post Thumbnail -->
-                        <div class="blog-post-thumbnail my-5">
-                            <img src="{% static 'assets/img/blog-img/21.jpg' %}" alt="post-thumb">
-                        </div>
-                        <!-- Post Excerpt -->
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend.</p>
-                        <!-- Reading More -->
-                        <div class="post-continue-reading-share mt-30">
-                            <div class="post-continue-btn">
-                                <a href="#" class="font-pt">Continue Reading <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <!-- Gazette Welcome Post -->
-                    <div class="gazette-welcome-post">
-                        <!-- Post Tag -->
-                        <div class="gazette-post-tag">
-                            <a href="#">Politices</a>
-                        </div>
-                        <h2 class="font-pt">What's behind the world obsession with gems?</h2>
-                        <p class="gazette-post-date">March 29, 2016</p>
-                        <!-- Post Thumbnail -->
-                        <div class="blog-post-thumbnail my-5">
-                            <img src="{% static 'assets/img/blog-img/22.jpg' %}" alt="post-thumb">
-                        </div>
-                        <!-- Post Excerpt -->
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend.</p>
-                        <!-- Reading More -->
-                        <div class="post-continue-reading-share mt-30">
-                            <div class="post-continue-btn">
-                                <a href="#" class="font-pt">Continue Reading <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
+                <div v-for="search in search_article" class="col-12">
                     <!-- Gazette Welcome Post -->
                     <div class="gazette-welcome-post d-md-flex align-items-center">
                         <!-- Post Thumbnail -->
                         <div class="blog-post-thumbnail">
-                            <img src="{% static 'assets/img/blog-img/23.jpg' %}" alt="post-thumb">
+                            <img :src="search.picture" alt="post-thumb">
                         </div>
                         <div class="welcome-post-contents ml-30">
                             <!-- Post Tag -->
                             <div class="gazette-post-tag">
-                                <a href="#">Politices</a>
+                                <a href="#">%{search.category.name}</a>
                             </div>
-                            <h2 class="font-pt">Justice Department rolls guidance on fining poor defendants </h2>
-                            <p class="gazette-post-date mb-15">March 29, 2016</p>
+                            <h2 class="font-pt">%{$options.filters.truncate_data(search.title, 20)}</h2>
+                            <p class="gazette-post-date mb-15">%{search.datePublication}</p>
                             <!-- Post Excerpt -->
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend.</p>
+                            <p v-html="$options.filters.truncate_data(article.description, 190)"></p>
                             <!-- Reading More -->
                             <div class="post-continue-reading-share mt-15">
                                 <div class="post-continue-btn">
-                                    <a href="#" class="font-pt">Continue Reading <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                                    <a href="#" class="font-pt">Lire Plus<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -172,3 +57,48 @@
 
     <!-- Footer Area Start -->
 {% endblock content %}
+
+
+{% block search %}
+    <script>
+        new Vue({
+            el:"#searchKeyWord",
+            data: {
+                search_article:[]
+            },
+            delimiters: ['%{', '}'],
+            mounted(){
+                    axios.post("http://nannews.herokuapp.com/graphql", {
+                        query: `
+                            {
+                            categoryBySlug(slug: "{{q}}"){
+                                name
+                                id
+                                slug
+                                categoryArticle{
+                                    id
+                                    title
+                                    slug
+                                    picture
+                                    description
+                                    datePublication
+                                    category {
+                                        name
+                                    }
+                                }
+                            }
+                        }`
+                        }, 
+                        {
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        }
+                        ).then((response)=>{
+                            this.search_article = response.data.data?.categoryBySlug?.categoryArticle
+                            console.log(this.search_article)
+                        })
+                }
+        })
+    </script>
+{% endblock search %}
