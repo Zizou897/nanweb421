@@ -56,6 +56,7 @@ class Site(Base):
     nom_site = models.CharField(max_length=250)
     address = models.CharField(max_length=250)
     image = models.FileField(upload_to="image_site")
+    image_footer = models.FileField(upload_to="image_foot")
     copy_ryght = models.CharField(max_length=250)
 
     class Meta:

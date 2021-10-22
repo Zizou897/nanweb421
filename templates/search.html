@@ -4,57 +4,68 @@
 {% block content %}
 
     <!-- Breadcumb Area Start -->
-    <div class="breadcumb-area section_padding_50">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breacumb-content d-flex align-items-center justify-content-between">
-                        <!-- Post Tag -->
-                        <div class="gazette-post-tag searh-results">
-                            <a href="#">Resultats {{q}}</a>
-                        </div>
-                        {% language 'fr' %}
-                            <p class="editorial-post-date text-dark mb-0">{% now "j F Y" %}</p>
-                        {% endlanguage %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcumb Area End -->
-
-    <section id ="searchKeyWord" class="catagory-welcome-post-area section_padding_100">
-        <div class="container">
-            <div class="row">
-                <div v-for="search in search_article" class="col-12">
-                    <!-- Gazette Welcome Post -->
-                    <div class="gazette-welcome-post d-md-flex align-items-center">
-                        <!-- Post Thumbnail -->
-                        <div class="blog-post-thumbnail">
-                            <img :src="search.picture" alt="post-thumb">
-                        </div>
-                        <div class="welcome-post-contents ml-30">
+    <main id ="searchKeyWord">
+        <div class="breadcumb-area section_padding_50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breacumb-content d-flex align-items-center justify-content-between">
                             <!-- Post Tag -->
-                            <div class="gazette-post-tag">
-                                <a href="#">%{search.category.name}</a>
+                            <div class="gazette-post-tag searh-results">
+                                <a href="#">Resultats </a>
                             </div>
-                            <h2 class="font-pt">%{$options.filters.truncate_data(search.title, 20)}</h2>
-                            <p class="gazette-post-date mb-15">%{search.datePublication}</p>
-                            <!-- Post Excerpt -->
-                            <p v-html="$options.filters.truncate_data(article.description, 190)"></p>
-                            <!-- Reading More -->
-                            <div class="post-continue-reading-share mt-15">
-                                <div class="post-continue-btn">
-                                    <a href="#" class="font-pt">Lire Plus<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
+                            <p v-if="results_number != 0" class="editorial-post-date text-dark mb-0">%{results_number} article trouvé</p>
+                            {% language 'fr' %}
+                                <p class="editorial-post-date text-dark mb-0">{% now "j F Y" %}</p>
+                            {% endlanguage %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+        <!-- Breadcumb Area End -->
 
+        <section  class="catagory-welcome-post-area section_padding_100">
+            <div class="container">
+                <div class="row">
+
+                    <div v-if="loading" class='modal-loader'>
+                        <div  v-if="loading" class="lds-ripple"><div></div><div></div></div>
+                    </div>
+
+                    <div v-else-if  v-for="search in search_article" class="col-12">
+                        <!-- Gazette Welcome Post -->
+                        <div class="gazette-welcome-post d-md-flex align-items-center">
+                            <!-- Post Thumbnail -->
+                            <div class="blog-post-thumbnail">
+                                <img :src="search.picture" alt="post-thumb">
+                            </div>
+                            <div class="welcome-post-contents ml-30">
+                                <!-- Post Tag -->
+                                <div class="gazette-post-tag">
+                                    <a href="#">%{search.category.name}</a>
+                                </div>
+                                <h2 class="font-pt">%{$options.filters.truncate_data(search.title,40)}</h2>
+                                <p class="gazette-post-date mb-15">%{search.datePublication}</p>
+                                <!-- Post Excerpt -->
+                                <p v-html="$options.filters.truncate_data(search.description, 190)"></p>
+                                <!-- Reading More -->
+                                <div class="post-continue-reading-share mt-15">
+                                    <div class="post-continue-btn">
+                                        <a :href="'/detail/' + search.id + '/'" class="font-pt">Lire Plus<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+
+                    <div v-if="results_number == 0" class="col-12">
+                        <p class="text-center"> Oups aucun article trouvé </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
     <!-- Footer Area Start -->
 {% endblock content %}
 
@@ -64,30 +75,35 @@
         new Vue({
             el:"#searchKeyWord",
             data: {
-                search_article:[]
+                search_article:[],
+                results_number: 0,
+                loading: true
             },
             delimiters: ['%{', '}'],
+            filters: {
+                truncate_data: function(data,num){
+                    let value = he.decode(data)
+                    const reqdString = 
+                    value.split("").slice(0, num).join("") + '...';
+                    return reqdString;
+                },
+            },
             mounted(){
                     axios.post("http://nannews.herokuapp.com/graphql", {
                         query: `
                             {
-                            categoryBySlug(slug: "{{q}}"){
-                                name
-                                id
-                                slug
-                                categoryArticle{
+                                findArticles(search: "{{q}}"){
                                     id
                                     title
-                                    slug
                                     picture
                                     description
                                     datePublication
-                                    category {
+                                    category{
+                                        id 
                                         name
                                     }
                                 }
-                            }
-                        }`
+                            }`
                         }, 
                         {
                             headers: {
@@ -95,9 +111,10 @@
                             }
                         }
                         ).then((response)=>{
-                            this.search_article = response.data.data?.categoryBySlug?.categoryArticle
-                            console.log(this.search_article)
-                        })
+                            this.search_article = response.data.data?.findArticles
+                            this.results_number = this.search_article.length
+                            console.log(this.search_article.length)
+                        }).finally(()=> this.loading = false)
                 }
         })
     </script>
