@@ -5,7 +5,7 @@
 
     <section id="detailApp" class="single-post-area">
         <!-- Single Post Title -->
-                                        
+                                 
         <div v-if="loading" class='modal-loader'>
             <div  v-if="loading" class="lds-ripple"><div></div><div></div></div>
         </div>
@@ -14,29 +14,29 @@
 
 
     
-        <div v-else v-for="detail in article_detail" v-if="detail.id == {{idt}}" class="single-post-title bg-img background-overlay" :style="{ backgroundImage: 'url(' + detail.picture + ')' }">
+        <div v-else class="single-post-title bg-img background-overlay" :style="{ backgroundImage: 'url(' + article_detail.picture + ')' }">
             <div class="container h-100">
                 <div class="row h-100 align-items-end">
                     <div class="col-12">
                         <div class="single-post-title-content">
                             <!-- Post Tag -->
                             <div class="gazette-post-tag">
-                                <a href="#">%{detail.category.name}</a>
+                                <a href="#">%{article_detail.category.name}</a>
                             </div>
-                            <h2 class="font-pt">%{detail.title}</h2>
-                            <p>%{detail.datePublication}</p>
+                            <h2 class="font-pt">%{article_detail.title}</h2>
+                            <p>%{article_detail.datePublication}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div v-for="detail in article_detail" v-if="detail.id == {{idt}}" class="single-post-contents">
+        <div class="single-post-contents">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-8">
                         <div class="single-post-text">
-                            <p v-html="detail.description"></p>
+                            <p v-html="article_detail.description"></p>
                         </div>
                     </div>
                     
@@ -60,7 +60,7 @@
             mounted(){
                 axios.post("https://nannews.herokuapp.com/graphql",{
                     query:`{
-                        allArticles{
+                        articleBySlug(slug:"{{idt}}"){
                             id
                             title
                             picture
@@ -79,8 +79,8 @@
                         }
                     }
                 ).then((response)=> {
-                    console.log(this.article_detail = response.data.data?.allArticles)
-                    this.article_detail = response.data.data?.allArticles
+                    console.log(this.article_detail = response.data.data?.articleBySlug)
+                    this.article_detail = response.data.data?.articleBySlug
                 })
                 .finally(()=> this.loading = false)
 

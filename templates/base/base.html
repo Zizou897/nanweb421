@@ -165,8 +165,8 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    {% comment %} <script src="{% static 'assets/js/axios.js' %}"></script> {% endcomment %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'assets/js/axios.js' %}"></script>
+    {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> {% endcomment %}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
      <!-- slider -->
@@ -217,7 +217,7 @@
             },
             delimiters: ['%{', '}'],
             mounted(){
-                axios.post("http://nannews.herokuapp.com/graphql", {
+                axios.post("https://nannews.herokuapp.com/graphql", {
                     query: `
                         {
                         category{

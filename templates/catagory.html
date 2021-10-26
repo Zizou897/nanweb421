@@ -4,63 +4,65 @@
 {% block content %}
 
     <!-- Breadcumb Area Start -->
-    <div class="breadcumb-area section_padding_50">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breacumb-content d-flex align-items-center justify-content-between">
-                        <!-- Post Tag -->
-                        <div class="gazette-post-tag">
-                            <a href="{% url 'catagory' %}">{{slug}}</a>
+    <main id="categorie_ART">
+        <div class="breadcumb-area section_padding_50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breacumb-content d-flex align-items-center justify-content-between">
+                            <!-- Post Tag -->
+                            <div class="gazette-post-tag">
+                                <a href="{% url 'catagory' %}">{{slug}}</a>
+                            </div>
+                            {% language 'fr' %}
+                                <p class="editorial-post-date text-dark mb-0">{% now "j F Y" %}</p>
+                            {% endlanguage %}
                         </div>
-                        {% language 'fr' %}
-                            <p class="editorial-post-date text-dark mb-0">{% now "j F Y" %}</p>
-                        {% endlanguage %}
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     <!-- Breadcumb Area End -->
 
    
     <!-- Editorial Area End -->
 
-    <section class="catagory-welcome-post-area section_padding_100">
-        <div class="container">
-            <div id="categorie_ART" class="row">
+        <section class="catagory-welcome-post-area section_padding_100">
+            <div class="container">
+                <div class="row">
 
-                <div v-if="loading" class='modal-loader'>
-                    <div  v-if="loading" class="lds-ripple"><div></div><div></div></div>
-                </div>
-                
-                    <div v-else v-for="article in categorie_article" class="col-12 col-md-4">
-                        <!-- Gazette Welcome Post -->
-                        <div class="gazette-welcome-post">
-                            <!-- Post Tag -->
-                            <div class="gazette-post-tag">
-                                <a href="#">%{article.category.name}</a>
-                            </div>
-                            <h2 class="font-pt">%{$options.filters.truncate_data(article.title, 40)}</h2>
-                            <p class="gazette-post-date">%{article.datePublicaion}</p>
-                            <!-- Post Thumbnail -->
-                            <div class="blog-post-thumbnail my-5">
-                                <img :src=" article.picture" alt="post-thumb">
-                            </div>
-                            <!-- Post Excerpt -->
-                            <p v-html="$options.filters.truncate_data(article.description, 190)"></p>
-                            <!-- Reading More -->
-                            <div class="post-continue-reading-share mt-30">
-                                <div class="post-continue-btn">
-                                    <a :href="'/detail/' + article.id + '/'" class="font-pt">Lire Plus <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    <div v-if="loading" class='modal-loader'>
+                        <div  v-if="loading" class="lds-ripple"><div></div><div></div></div>
+                    </div>
+                    
+                        <div v-else v-for="article in categorie_article" class="col-12 col-md-4">
+                            <!-- Gazette Welcome Post -->
+                            <div class="gazette-welcome-post">
+                                <!-- Post Tag -->
+                                <div class="gazette-post-tag">
+                                    <a href="#">%{article.node.category.name}</a>
+                                </div>
+                                <h2 class="font-pt">%{$options.filters.truncate_data(article.node.title, 40)}</h2>
+                                <p class="gazette-post-date">%{article.node.datePublicaion}</p>
+                                <!-- Post Thumbnail -->
+                                <div class="blog-post-thumbnail my-5">
+                                    <img :src=" article.node.picture" alt="post-thumb">
+                                </div>
+                                <!-- Post Excerpt -->
+                                <p v-html="$options.filters.truncate_data(article.node.description, 190)"></p>
+                                <!-- Reading More -->
+                                <div class="post-continue-reading-share mt-30">
+                                    <div class="post-continue-btn">
+                                        <a :href="'/detail/' + article.node.slug + '/'" class="font-pt">Lire Plus <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                
+                    
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 {% endblock content %}
 
 
@@ -85,40 +87,53 @@
                 },
             },
             mounted(){
-                axios.post("http://nannews.herokuapp.com/graphql", {
-                    query: `
-                        {
-                        categoryBySlug(slug: "{{slug}}"){
-                            name
-                            id
-                            slug
-                            categoryArticle{
-                                id
-                                title
-                                slug
-                                picture
-                                description
-                                datePublication
-                                category {
+                axios.post("https://nannews.herokuapp.com/graphql", {
+                    query:`{
+                        relayCategories(slug_Iexact:"{{slug}}"){
+                            edges{
+                                cursor
+                                node{
+                                    id
                                     name
+                                    categoryArticle{
+                                        edges{
+                                            cursor
+                                            node{
+                                                id
+                                                slug
+                                                title
+                                                picture
+                                                description
+                                                datePublication
+                                                category{
+                                                    id
+                                                    name
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
                     }`
-                    }, 
-                    {
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
+                }, 
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
                     }
-                    ).then((response)=>{
-                        console.log(response)
-                        this.categorie_article = response.data.data?.categoryBySlug?.categoryArticle
-                        console.log(this.categorie_article)
-                    }).finally(()=> this.loading = false)
+                }
+                ).then((response)=>{
+                    let temp = response.data.data.relayCategories.edges[0].node
+                    console.log(temp)
+                    this.categorie_article = temp.categoryArticle?.edges
+                    console.log(this.categorie_article)
+                }).finally(()=> this.loading = false)
+            },
+            methods:{
+
             }
         })
 
     </script>
 
-{% endblock allCategorie%}
+{% endblock allCategorie %}

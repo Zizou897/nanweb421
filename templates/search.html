@@ -89,7 +89,7 @@
                 },
             },
             mounted(){
-                    axios.post("http://nannews.herokuapp.com/graphql", {
+                    axios.post("https://nannews.herokuapp.com/graphql/", {
                         query: `
                             {
                                 findArticles(search: "{{q}}"){

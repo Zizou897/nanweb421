@@ -12,7 +12,7 @@
                     <div class="tags">
                         <a href="{% url 'catagory' %}">%{art.category.name}</a>
                     </div>
-                    <h3><a :href="'/detail/' + art.id + '/' " class="font-pt">%{art.title}</a></h3>
+                    <h3><a :href="'/detail/' + art.slug + '/' " class="font-pt">%{art.title}</a></h3>
                     <div class="date">
                         <a href="#">%{art.datePublication}</a>
                     </div>
@@ -50,7 +50,7 @@
                             <div class="gazette-post-tag">
                                 <a href="{% url 'catagory' %}">%{popular.category.name}</a>
                             </div>
-                            <a :href="'/detail/' + popular.id + '/'"><h2 class="font-pt">%{popular.title}</h2></a>
+                            <a :href="'/detail/' + popular.slug + '/'"><h2 class="font-pt">%{popular.title}</h2></a>
                             <p class="gazette-post-date">%{popular.datePublication}</p>
                             <!-- Post Thumbnail -->
                             <div class="blog-post-thumbnail my-5">
@@ -61,7 +61,7 @@
                             <!-- Reading More -->
                             <div class="post-continue-reading-share d-sm-flex align-items-center justify-content-between mt-30">
                                 <div class="post-continue-btn">
-                                    <a :href="'/detail/' + popular.id + '/'" class="font-pt">Lire plus<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                                    <a :href="'/detail/' + popular.slug + '/'" class="font-pt">Lire plus<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                                 <div class="gazette-post-tag">
                                     <a href="{% url 'catagory' %}">%{pop1.category.name}</a>
                                 </div>
-                                <h3><a :href=" 'detail/' + pop1.id + '/' " class="font-pt mb-2">%{pop1.title}</a></h3>
+                                <h3><a :href=" 'detail/' + pop1.slug + '/' " class="font-pt mb-2">%{pop1.title}</a></h3>
                                 <span class="gazette-post-date mb-2">%{pop1.datePublication}</span>
                                 
                                 <p v-html="$options.filters.truncate_data(pop1.description, 200)"></p>
@@ -130,7 +130,7 @@
                                     <img :src="arti.picture" alt="">
                                 </div>
                                 <div class="dont-miss-post-content">
-                                    <a :href="'detail/' + arti.id + '/'" class="font-pt">%{arti.title}</a>
+                                    <a :href="'detail/' + arti.slug + '/'" class="font-pt">%{arti.title}</a>
                                     <span>%{arti.datePublication}</span>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                                 <div v-if="index == 0" class="gazette-post-tag">
                                     <a href="#">%{tit_art.category.name}</a>
                                 </div>
-                                <h5><a :href="'detail/' + tit_art.id + '/' " class="font-pt">%{tit_art.title}</a></h5>
+                                <h5><a :href="'detail/' + tit_art.slug + '/' " class="font-pt">%{tit_art.title}</a></h5>
                                 <span>%{tit_art.datePublication}</span>
                             </div>
                         </div>       
@@ -197,7 +197,7 @@
                                         <div class="gazette-post-tag">
                                             <a href="#">%{autre.category.name}</a>
                                         </div>
-                                        <h5><a :href="'detail/' + autre.id + '/' " class="font-pt">%{autre.title}</a></h5>
+                                        <h5><a :href="'detail/' + autre.slug + '/' " class="font-pt">%{autre.title}</a></h5>
                                         <span>%{autre.datePublication}</span>
                                     </div>
                                 </div>
@@ -215,7 +215,7 @@
                                 <div v-if="index == 0" class="gazette-post-tag">
                                     <a href="#">%{title_art.category.name}</a>
                                 </div>
-                                <h5><a :href=" 'detail/' + title_art.id + '/' " class="font-pt">%{title_art.title}</a></h5>
+                                <h5><a :href=" 'detail/' + title_art.slug + '/' " class="font-pt">%{title_art.title}</a></h5>
                                 <span>%{title_art.datePublication}</span>
                             </div>
                         </div>
@@ -263,11 +263,12 @@
             },
             delimiters: ['%{', '}'],
             mounted(){
-                axios.post("http://nannews.herokuapp.com/graphql", {
+                axios.post("https://nannews.herokuapp.com/graphql", {
                     query: `
                         {
                         recentArticles{
                             id
+                            slug
                             title
                             picture
                             description
@@ -303,11 +304,12 @@
             },
             delimiters: ['%{', '}'],
             mounted(){
-                axios.post("http://nannews.herokuapp.com/graphql", {
+                axios.post("https://nannews.herokuapp.com/graphql", {
                     query: `
                         {
                         recentArticles{
                             id
+                            slug
                             title
                             picture
                             description
@@ -339,11 +341,12 @@
             },
             delimiters: ['%{', '}'],
             mounted(){
-                axios.post("http://nannews.herokuapp.com/graphql", {
+                axios.post("https://nannews.herokuapp.com/graphql", {
                     query: `
                         {
                         recentArticlesTitle{
                             id
+                            slug
                             title
                             datePublication
                         }
@@ -388,11 +391,12 @@
                 },
             },
             mounted(){
-                axios.post("http://nannews.herokuapp.com/graphql", {
+                axios.post("https://nannews.herokuapp.com/graphql", {
                     query: `
                         {
                         popularArticles{
                             id
+                            slug
                             title
                             picture
                             description
@@ -434,11 +438,12 @@
                 }
             },
             mounted(){
-                axios.post("http://nannews.herokuapp.com/graphql", {
+                axios.post("https://nannews.herokuapp.com/graphql", {
                     query: `
                         {
                         popularArticles{
                             id
+                            slug
                             title
                             picture
                             description
@@ -481,11 +486,12 @@
                 },
             },
             mounted(){
-                axios.post("http://nannews.herokuapp.com/graphql", {
+                axios.post("https://nannews.herokuapp.com/graphql", {
                     query: `
                         {
                         recentArticles{
                             id
+                            slug
                             title
                             picture
                             datePublication
@@ -527,11 +533,12 @@
                 },
             },
             mounted(){
-                axios.post("http://nannews.herokuapp.com/graphql", {
+                axios.post("https://nannews.herokuapp.com/graphql", {
                     query: `
                         {
                         recentArticlesTitle{
                             id
+                            slug
                             title
                             picture
                             datePublication
@@ -570,11 +577,12 @@
                 },
             },
             mounted(){
-                axios.post("http://nannews.herokuapp.com/graphql", {
+                axios.post("https://nannews.herokuapp.com/graphql", {
                     query: `
                         {
                         recentArticlesTitle{
                             id
+                            slug
                             title
                             picture
                             datePublication
