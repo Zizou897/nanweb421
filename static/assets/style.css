@@ -58,3 +58,67 @@
 .searh-results a{
   background-color: #e99a08;
 }
+
+/* le slider bar */
+
+
+
+
+.title-section{
+  padding: 30px;
+}
+
+.title-section .section-block{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.509),rgba(0, 0, 0, 0.509));
+}
+
+
+.title-section .tags a{
+  background-color: #777FFF;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 2px;
+  padding: 5px 10px;
+  color: white;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.title-section h3 a{
+  color: #fff;
+  font-size: 2rem;
+  margin-top: 50px;
+}
+
+.title-section .date a{
+  color: #fff;
+  font-style: italic;
+  font-size: 14px;
+  display: inline-block;
+}
+
+/* marquee */
+
+.text-marque{
+  background-color: black;
+  height: 80px;
+  margin-top:0;
+  display: flex;
+}
+
+.text_tt1{
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color:#fff
+}
+
+.time{
+  background-color: #777FFF;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+  margin-right: 10px;
+}

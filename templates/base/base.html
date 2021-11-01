@@ -64,7 +64,7 @@
                                         <li class="nav-item active">
                                             <a class="nav-link" href="{% url 'index' %}">Accueil <span class="sr-only">(current)</span></a>
                                         </li>
-                                        <li v-for="(cat, index) in categorie.slice(0,6)" class="nav-item">
+                                        <li v-for="(cat, index) in categorie.slice(0,5)" class="nav-item">
                                             <a  class="nav-link" :href=" '/catagory/'+ cat.slug + '/' ">%{cat.name}</a>
                                         </li>
                                         <li class="nav-item dropdown">
@@ -206,7 +206,12 @@
 {% block search %}
 
 {% endblock search %}
+
 {% comment %} ---------------------------- {% endcomment %}
+
+
+{% block contact %}
+{% endblock contact %}
 
 {% comment %} Diferents category in menu {% endcomment %}
     <script>

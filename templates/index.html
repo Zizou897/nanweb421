@@ -4,15 +4,15 @@
 
 
     <div >
-        <section id="dataArt" class="welcome-blog-post-slide">
+        <section id="dataArt" style="display:flex; height:80vh; max-width:100%">
             <!-- Single Blog Post -->          
-            <div  v-for="art in article" class="single-blog-post-slide bg-img background-overlay-5 slider-div"  :style="{ backgroundImage: 'url(' + art.picture + ')' }">
+            <div  v-for="art in article.slice(0,3)" class="section-block"  :style="{ backgroundImage: 'url(' + art.picture + ')',  backgroundRepeat: call, backgroundSize: cover, backgroundPosition:place, width: percent, height: hauteur }">
                 <!-- Single Blog Post Content -->
-                <div class="single-blog-post-content">
+                <div class="title-section">
                     <div class="tags">
                         <a href="{% url 'catagory' %}">%{art.category.name}</a>
                     </div>
-                    <h3><a :href="'/detail/' + art.slug + '/' " class="font-pt">%{art.title}</a></h3>
+                    <h3><a :href="'/detail/' + art.slug + '/' " class="font-pt">%{$options.filters.truncate_data(art.title,40)}</a></h3>
                     <div class="date">
                         <a href="#">%{art.datePublication}</a>
                     </div>
@@ -24,14 +24,14 @@
 
 
         <!-- Latest News Marquee Area Start -->
-        <div id="dataArtTitle" class="latest-news-marquee-area">
-            <div class="simple-marquee-container">
-                <div class="marquee">
-                    <ul class="marquee-content-items">
-                        <li v-for="text in textBar.slice(0,3)">
-                            <a href="#"><span class="latest-news-time">10h40</span>%{text.title}</a>
-                        </li>
-                    </ul>
+        <div id="dataArtTitle" class="">
+            <div class="">
+                <div class="">
+                    <ul class="text-marque">
+                            <li v-for="text in textBar.slice(0,3)">
+                                <a href="#" class="text_tt1"><span class="time">10h40</span>%{$options.filters.truncate_data(text.title,40)}</a>
+                            </li>
+                        </ul>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                             <div class="gazette-post-tag">
                                 <a href="{% url 'catagory' %}">%{popular.category.name}</a>
                             </div>
-                            <a :href="'/detail/' + popular.slug + '/'"><h2 class="font-pt">%{popular.title}</h2></a>
+                            <a :href="'/detail/' + popular.slug + '/'"><h2 class="font-pt">%{$options.filters.truncate_data(popular.title,40)}</h2></a>
                             <p class="gazette-post-date">%{popular.datePublication}</p>
                             <!-- Post Thumbnail -->
                             <div class="blog-post-thumbnail my-5">
@@ -80,7 +80,7 @@
                                 <div class="gazette-post-tag">
                                     <a href="{% url 'catagory' %}">%{pop1.category.name}</a>
                                 </div>
-                                <h3><a :href=" 'detail/' + pop1.slug + '/' " class="font-pt mb-2">%{pop1.title}</a></h3>
+                                <h3><a :href=" 'detail/' + pop1.slug + '/' " class="font-pt mb-2">%{$options.filters.truncate_data(pop1.title,40)}</a></h3>
                                 <span class="gazette-post-date mb-2">%{pop1.datePublication}</span>
                                 
                                 <p v-html="$options.filters.truncate_data(pop1.description, 200)"></p>
@@ -130,7 +130,7 @@
                                     <img :src="arti.picture" alt="">
                                 </div>
                                 <div class="dont-miss-post-content">
-                                    <a :href="'detail/' + arti.slug + '/'" class="font-pt">%{arti.title}</a>
+                                    <a :href="'detail/' + arti.slug + '/'" class="font-pt">%{$options.filters.truncate_data(arti.title,40)}</a>
                                     <span>%{arti.datePublication}</span>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                                 <div v-if="index == 0" class="gazette-post-tag">
                                     <a href="#">%{tit_art.category.name}</a>
                                 </div>
-                                <h5><a :href="'detail/' + tit_art.slug + '/' " class="font-pt">%{tit_art.title}</a></h5>
+                                <h5><a :href="'detail/' + tit_art.slug + '/' " class="font-pt">%{$options.filters.truncate_data(tit_art.title,40)}</a></h5>
                                 <span>%{tit_art.datePublication}</span>
                             </div>
                         </div>       
@@ -197,7 +197,7 @@
                                         <div class="gazette-post-tag">
                                             <a href="#">%{autre.category.name}</a>
                                         </div>
-                                        <h5><a :href="'detail/' + autre.slug + '/' " class="font-pt">%{autre.title}</a></h5>
+                                        <h5><a :href="'detail/' + autre.slug + '/' " class="font-pt">%{$options.filters.truncate_data(autre.title,40)}</a></h5>
                                         <span>%{autre.datePublication}</span>
                                     </div>
                                 </div>
@@ -215,7 +215,7 @@
                                 <div v-if="index == 0" class="gazette-post-tag">
                                     <a href="#">%{title_art.category.name}</a>
                                 </div>
-                                <h5><a :href=" 'detail/' + title_art.slug + '/' " class="font-pt">%{title_art.title}</a></h5>
+                                <h5><a :href=" 'detail/' + title_art.slug + '/' " class="font-pt">%{$options.filters.truncate_data(title_art.title,40)}</a></h5>
                                 <span>%{title_art.datePublication}</span>
                             </div>
                         </div>
@@ -262,6 +262,14 @@
                 article: []
             },
             delimiters: ['%{', '}'],
+            filters: {
+                truncate_data: function(data,num){
+                    let value = he.decode(data)
+                    const reqdString = 
+                    value.split("").slice(0, num).join("") + '...';
+                    return reqdString;
+                }
+            },
             mounted(){
                 axios.post("https://nannews.herokuapp.com/graphql", {
                     query: `
@@ -301,8 +309,23 @@
             el: "#dataArt",
             data:{
                 article: [],
+                color: "linear-gradient(rgba(0, 0, 0, 0.509),rgba(0, 0, 0, 0.509))",
+                call : 'no-repeat',
+                place: 'center',
+                cover: 'cover',
+                percent: '100%',
+                hauteur: '80vh',
+                couleur: 'white'
             },
             delimiters: ['%{', '}'],
+            filters: {
+                truncate_data: function(data,num){
+                    let value = he.decode(data)
+                    const reqdString = 
+                    value.split("").slice(0, num).join("") + '...';
+                    return reqdString;
+                }
+            },
             mounted(){
                 axios.post("https://nannews.herokuapp.com/graphql", {
                     query: `
@@ -340,6 +363,14 @@
                 textBar: [],
             },
             delimiters: ['%{', '}'],
+            filters: {
+                truncate_data: function(data,num){
+                    let value = he.decode(data)
+                    const reqdString = 
+                    value.split("").slice(0, num).join("") + '...';
+                    return reqdString;
+                }
+            },
             mounted(){
                 axios.post("https://nannews.herokuapp.com/graphql", {
                     query: `
