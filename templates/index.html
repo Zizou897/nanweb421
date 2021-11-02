@@ -4,9 +4,9 @@
 
 
     <div >
-        <section id="dataArt" style="display:flex; height:80vh; max-width:100%">
+        <section id="dataArt" style="display:flex; height:60vh; max-width:100%">
             <!-- Single Blog Post -->          
-            <div  v-for="art in article.slice(0,3)" class="section-block"  :style="{ backgroundImage: 'url(' + art.picture + ')',  backgroundRepeat: call, backgroundSize: cover, backgroundPosition:place, width: percent, height: hauteur }">
+            <div  v-for="art in article.slice(0,3)" class="section-block"  :style="{backgroundImage: 'url(' + art.picture + ')',  backgroundRepeat: call, backgroundSize: cover, backgroundPosition:place, width: percent, height: hauteur, filter: filtre }">
                 <!-- Single Blog Post Content -->
                 <div class="title-section">
                     <div class="tags">
@@ -17,8 +17,9 @@
                         <a href="#">%{art.datePublication}</a>
                     </div>
                 </div>
-            </div>
+            </div> 
             <!-- Single Blog Post -->
+
         </section>
         <!-- Welcome Blog Slide Area End -->
 
@@ -314,8 +315,9 @@
                 place: 'center',
                 cover: 'cover',
                 percent: '100%',
-                hauteur: '80vh',
-                couleur: 'white'
+                hauteur: '100%',
+                couleur: 'white',
+                filtre: 'grayscale(60%)'
             },
             delimiters: ['%{', '}'],
             filters: {
