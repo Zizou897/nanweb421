@@ -29,8 +29,8 @@
             <div class="">
                 <div class="">
                     <ul class="text-marque">
-                            <li v-for="text in textBar.slice(0,3)">
-                                <a href="#" class="text_tt1"><span class="time">10h40</span>%{$options.filters.truncate_data(text.title,40)}</a>
+                            <li v-for="text in textBar.slice(0,5)">
+                                <a href="#" id ="text_marquuee" class="text_tt1"><span class="time">info</span>%{$options.filters.truncate_data(text.title,40)}</a>
                             </li>
                         </ul>
                 </div>
@@ -240,19 +240,41 @@
 {% block vuejs %}
 
     <script>
+        
+        let animate_text = document.getElementsByClassName("text_tt1")
+
+        animate(animate_text)
+
+        function animate(element) {
+            let elementWidth = element.offsetWidth;
+            let parentWidth = element.parentElement.offsetWidth;
+            let flag = 0;
+        
+            setInterval(() => {
+                element.style.marginLeft = --flag + "px";
+  
+                if (elementWidth == -flag) {
+                    flag = parentWidth;
+                }
+        }, 10);
+}
+
+    </script>
+
+    <script>
         {% comment %} 
-        Vue.filter('truncate_article', function (value, length) {
-            if (!value){
-                return ''
-            }
-            value = value.toString()
-            if(value.length > length){
-                return value.substring(0, length) + "..."
-            }
-            else{
-                return value
-            }
-        }) 
+            Vue.filter('truncate_article', function (value, length) {
+                if (!value){
+                    return ''
+                }
+                value = value.toString()
+                if(value.length > length){
+                    return value.substring(0, length) + "..."
+                }
+                else{
+                    return value
+                }
+            }) 
         {% endcomment %}
 
 
