@@ -173,6 +173,47 @@
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
     <script  src="{% static 'assets/js/script.js' %}"></script>
 
+    <script>
+let compteur = 0;
+let slideCompt = 0;
+let next = document.querySelector('#nav-gauche');
+let prev = document.querySelector('#nav-droite');
+
+next.addEventListener('click', slideNext);
+
+window.onload = () => {
+    timer = setInterval(slideNext, 3000)
+}
+
+function slideNext() {
+     compteur++
+     if(slideCompt === 6) slideCompt = 0;
+     let slideWidth = (33.3 * window.innerWidth)/100;
+     let decal = -slideWidth * compteur
+     document.querySelector('.elements').style.transform = ` translateX(${decal}px)`
+     let slides = 
+     document.querySelector('.elements').innerHTML += calc(slides[slideCompt])
+     slideCompt++;
+        // elements.removeChild(elements.children[0]);
+}
+
+const calc = (data) => {
+    return `<div  class="section-block element"  :style="{backgroundImage: url(${data.url}',  backgroundRepeat: call, backgroundSize: cover, backgroundPosition:place, width: percent, overflow: overflow, filter: filtre, }">
+                    <!-- Single Blog Post Content -->
+                    <div class="title-section">
+                        <div class="tags">
+                            <a href=""></a>
+                        </div>
+                        <h3><a :href="'/detail/' + art.slug + '/' " class="font-pt">%{$options.filters.truncate_data(art.title,40)}</a></h3>
+                        <div class="date">
+                            <a href="#">%{art.datePublication}</a>
+                        </div>
+                    </div>
+                </div> `
+}
+
+    </script>
+
     {% block scripts %}
         
     {% endblock scripts %}

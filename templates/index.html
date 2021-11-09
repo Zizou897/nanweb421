@@ -4,22 +4,25 @@
 
 
     <div >
-        <section id="dataArt" style="display:flex; height:60vh; max-width:100%">
-            <!-- Single Blog Post -->          
-            <div  v-for="art in article.slice(0,3)" class="section-block"  :style="{backgroundImage: 'url(' + art.picture + ')',  backgroundRepeat: call, backgroundSize: cover, backgroundPosition:place, width: percent, height: hauteur, filter: filtre }">
-                <!-- Single Blog Post Content -->
-                <div class="title-section">
-                    <div class="tags">
-                        <a href="{% url 'catagory' %}">%{art.category.name}</a>
+        <section id="dataArt" class="diaspo" style="height:60vh; max-width:100%; overflow:hidden; position:relative">
+            <!-- Single Blog Post -->  
+            <div class="elements active"  style="display:flex; height:100%;">  
+                <div  v-for="art in article" class="section-block element"  :style="{backgroundImage: 'url(' + art.picture + ')',  backgroundRepeat: call, backgroundSize: cover, backgroundPosition:place, width: percent, overflow: overflow, filter: filtre, }">
+                    <!-- Single Blog Post Content -->
+                    <div class="title-section">
+                        <div class="tags">
+                            <a href="{% url 'catagory' %}">%{art.category.name}</a>
+                        </div>
+                        <h3><a :href="'/detail/' + art.slug + '/' " class="font-pt">%{$options.filters.truncate_data(art.title,40)}</a></h3>
+                        <div class="date">
+                            <a href="#">%{art.datePublication}</a>
+                        </div>
                     </div>
-                    <h3><a :href="'/detail/' + art.slug + '/' " class="font-pt">%{$options.filters.truncate_data(art.title,40)}</a></h3>
-                    <div class="date">
-                        <a href="#">%{art.datePublication}</a>
-                    </div>
-                </div>
-            </div> 
+                </div> 
+            </div>
+            <img src="{% static 'assets/img/right-arrow.svg' %}" alt="" id="nav-gauche">
+            <img src="{% static 'assets/img/left-arrow.svg' %}" alt="" id="nav-droite">
             <!-- Single Blog Post -->
-
         </section>
         <!-- Welcome Blog Slide Area End -->
 
@@ -331,14 +334,14 @@
             el: "#dataArt",
             data:{
                 article: [],
-                color: "linear-gradient(rgba(0, 0, 0, 0.509),rgba(0, 0, 0, 0.509))",
                 call : 'no-repeat',
                 place: 'center',
                 cover: 'cover',
                 percent: '100%',
                 hauteur: '100%',
                 couleur: 'white',
-                filtre: 'grayscale(60%)'
+                filtre: 'grayscale(60%)',
+                
             },
             delimiters: ['%{', '}'],
             filters: {
