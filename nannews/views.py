@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.core.mail import send_mail
 
 import re
 import json
@@ -8,6 +9,7 @@ from nannews import models
 
 # Create your views here.
 def index(request):
+    accueil = True
     site_web = models.Site.objects.filter(status=True).first()
     return render(request, "index.html", locals())
 
@@ -45,16 +47,6 @@ def detail(request, idt=None):
 
 
 
-def is_email(email):
-    try:
-        validate_email(email)
-        return True
-    except:
-        return False
-
-
-
-
 @csrf_exempt
 def checkup(request):
     success = True
@@ -67,7 +59,7 @@ def checkup(request):
         if email.isspace() or email == '' or name.isspace() or name == '' or message.isspace() or message == '':
             success = False
             text = 'Veuillez remplir les champs vides'
-        elif is_email(email):
+        elif re.match('\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b',email):
             success = False
             text = 'Veuillez saisir un email valide'
         elif not re.fullmatch("[A-Za-z'éèëöüïäû ]+", name):
@@ -78,6 +70,14 @@ def checkup(request):
             contact.save()
             if created:
                 text = 'Votre message a bien été envoyé'
+
+                send_mail(
+                    name,
+                    message,
+                    email,
+                    ['azeridwan10@gmail.com'], 
+                    fail_silently=False,
+                )
             else:
                 text = 'Votre message est déjà envoyé'
 
@@ -99,7 +99,7 @@ def registerEmail(request):
         email = json.loads(request.POST.get('email'))
         if email.isspace():
             msg = 'veuillez remplir ce champ avant de le soumettre !!!'
-        elif is_email(email):
+        elif re.match('\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b', email):
             msg = 'Email invalide'
         else:
             news, created = models.Newsletter.objects.get_or_create(email=email)

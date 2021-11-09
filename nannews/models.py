@@ -110,7 +110,7 @@ class SocialUser(Base):
 
 class Config(Base):
     nom_history = models.CharField(max_length=150)
-    history = models.TextField()
+    history = HTMLField()
     titre_description = models.CharField(max_length=250)
     description = models.TextField()
 

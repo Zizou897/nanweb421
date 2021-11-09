@@ -76,7 +76,7 @@
             el:"#searchKeyWord",
             data: {
                 search_article:[],
-                results_number: 0,
+                results_number: 1,
                 loading: true
             },
             delimiters: ['%{', '}'],
@@ -89,32 +89,17 @@
                 },
             },
             mounted(){
-                    axios.post("https://nannews.herokuapp.com/graphql", {
-                        query: `
-                            {
-                                findArticles(search: "{{q}}"){
-                                    id
-                                    slug
-                                    title
-                                    picture
-                                    description
-                                    datePublication
-                                    category{
-                                        id 
-                                        name
-                                    }
-                                }
-                            }`
-                        }, 
+                    axios.get("https://nannews.herokuapp.com/api/find-article/{{q}}", 
                         {
                             headers: {
                                 'Content-Type': 'application/json'
                             }
                         }
                         ).then((response)=>{
-                            this.search_article = response.data.data?.findArticles
-                            this.results_number = this.search_article.length
-                            console.log(this.search_article.length)
+                            this.search_article = response.data?.results
+                            let number = response.data?.results
+                            this.results_number = number.length
+                            console.log(this.results_number)
                         }).finally(()=> this.loading = false)
                 }
         })

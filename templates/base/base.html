@@ -61,16 +61,16 @@
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gazetteMenu" aria-controls="gazetteMenu" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i> Menu</button>
                                 <div class="collapse navbar-collapse" id="gazetteMenu">
                                     <ul id="data" class="navbar-nav mr-auto">
-                                        <li class="nav-item active">
+                                        <li class="nav-item {% if accueil %} active {% endif %}">
                                             <a class="nav-link" href="{% url 'index' %}">Accueil <span class="sr-only">(current)</span></a>
                                         </li>
-                                        <li v-for="(cat, index) in categorie.slice(0,5)" class="nav-item">
+                                        <li v-for="(cat, index) in categorie.slice(0,5)" class="nav-item" :class="{active: cat.slug ==='{{slug}}' }">
                                             <a  class="nav-link" :href=" '/catagory/'+ cat.slug + '/' ">%{cat.name}</a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Autres</a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a  v-for="(cati, index) in categorie.slice(6,12)" class="dropdown-item" :href=" '/catagory/'+ cati.slug + '/' ">%{cati.name}</a>
+                                                <a  v-for="(cati, index) in categorie.slice(6,12)" class="dropdown-item" :class="{active: cati.slug ==='{{slug}}' }" :href=" '/catagory/'+ cati.slug + '/' ">%{cati.name}</a>
                                             </div>
                                         </li>                          
                                     </ul>
