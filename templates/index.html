@@ -25,17 +25,16 @@
 
 
         <!-- Latest News Marquee Area Start -->
-        <div id="dataArtTitle" class="">
-            <div class="">
-                <div class="">
-                    <ul class="text-marque">
-                            <li v-for="text in textBar.slice(0,5)">
-                                <a href="#" id ="text_marquuee" class="text_tt1"><span class="time">info</span>%{$options.filters.truncate_data(text.title,40)}</a>
-                            </li>
-                        </ul>
-                </div>
-            </div>
+       
+            
+        <div id="dataArtTitle" class="text">
+            <div v-for="text in textBar.slice(0,15)" class="text_tt1">
+                <div class="time">info</div>
+                <p> <a href="#" >%{$options.filters.truncate_data(text.title,40)}</a><p>
+            </div>        
         </div>
+    
+        
     </div>
     <!-- Latest News Marquee Area End -->
 
