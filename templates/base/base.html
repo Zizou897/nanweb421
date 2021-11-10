@@ -36,17 +36,30 @@
             <div class="container h-100">
                 <div class="row h-100 align-items-center">
                     <!-- Logo Area -->
-                    <div class="col-12 col-md-4">
+                    {% comment %} <div class="col-12 col-md-4">
                         <div class="logo-area">
-                            <a href="{% url 'index' %}"><img src="{{ site_web.image.url}}" alt="logo"></a>
+                            <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo-nan.png'%}" alt="logo"></a>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     <!-- Header Advert Area -->
-                    <div class="col-12 col-md-8">
+                    {% comment %} <div class="col-12 col-md-8">
                         <div class="header-advert-area">
                             <a href="#"><img src="{% static 'assets/img/bg-img/top-advert.png' %}" alt="header-add"></a>
                         </div>
+                    </div> {% endcomment %}
+                    <div class="col-12 h-100 logo">
+                        <div>
+                            <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo-nan.png'%}" class="logo-img" alt="logo"></a>
+                        </div>
+
+                        <div>
+                            <a href="{% url 'index' %}" class="logo-text"><span>NaN</span>News</a>
+                        </div>
                     </div>
+                    {% comment %} <div class="col-6 h-100 pt-4 logo-text">
+                        <a href="{% url 'index' %}"><span>NaN</span>News</a>
+                    </div> {% endcomment %}
+
                 </div>
             </div>
         </div>
@@ -69,12 +82,12 @@
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Autres</a>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <div class="dropdown-menu mb-3" aria-labelledby="navbarDropdown">
                                                 <a  v-for="(cati, index) in categorie.slice(6,12)" class="dropdown-item" :class="{active: cati.slug ==='{{slug}}' }" :href=" '/catagory/'+ cati.slug + '/' ">%{cati.name}</a>
                                             </div>
                                         </li>                          
                                     </ul>
-                                    <ul class="navbar-nav mr-auto">
+                                    <ul class="navbar-nav mr-auto personnal-flex">
                                         <li class="nav-item personal-link">
                                             <a class="nav-link personal" href="{% url 'about' %}">A propos</a>
                                         </li>
