@@ -4,7 +4,7 @@
 {% block content %}
 
     <!-- Breadcumb Area Start -->
-    <main id="categorie_ART">
+    <main id="categorie_ART"  style="height: 1000px; overflow:auto;">
         <div class="breadcumb-area section_padding_50">
             <div class="container">
                 <div class="row">
@@ -24,45 +24,45 @@
         </div>
     <!-- Breadcumb Area End -->
 
-   
     <!-- Editorial Area End -->
 
-        <section class="catagory-welcome-post-area section_padding_100">
-            <div class="container">
-                <div class="row">
+        <section  class="catagory-welcome-post-area section_padding_100" >
+            <div  class="container"> 
+                <div  class="row"  >
 
                     <div v-if="loading" class='modal-loader'>
                         <div  v-if="loading" class="lds-ripple"><div></div><div></div></div>
                     </div>
                     
-                        <div v-else v-for="article in categorie_article" class="col-12 col-md-4">
-                            <!-- Gazette Welcome Post -->
-                            <div class="gazette-welcome-post">
-                                <!-- Post Tag -->
-                                <div class="gazette-post-tag">
-                                    <a href="#">%{article.node.category.name}</a>
-                                </div>
-                                <h2 class="font-pt">%{$options.filters.truncate_data(article.node.title, 40)}</h2>
-                                <p class="gazette-post-date">%{article.node.datePublicaion}</p>
-                                <!-- Post Thumbnail -->
-                                <div class="blog-post-thumbnail my-5">
-                                    <img :src=" article.node.picture" alt="post-thumb">
-                                </div>
-                                <!-- Post Excerpt -->
-                                <p v-html="$options.filters.truncate_data(article.node.description, 190)"></p>
-                                <!-- Reading More -->
-                                <div class="post-continue-reading-share mt-30">
-                                    <div class="post-continue-btn">
-                                        <a :href="'/detail/' + article.node.slug + '/'" class="font-pt">Lire Plus <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                                    </div>
+                    <div  v-else v-for="article in categorie_article" class="col-12 col-md-4">
+                        <!-- Gazette Welcome Post -->
+                        <div class="gazette-welcome-post">
+                            <!-- Post Tag -->
+                            <div class="gazette-post-tag">
+                                <a href="#">%{article.node.category.name}</a>
+                            </div>
+                            <h2 class="font-pt">%{$options.filters.truncate_data(article.node.title, 40)}</h2>
+                            <p class="gazette-post-date">%{article.node.datePublicaion}</p>
+                            <!-- Post Thumbnail -->
+                            <div class="blog-post-thumbnail my-5">
+                                <img :src=" article.node.picture" alt="post-thumb">
+                            </div>
+                            <!-- Post Excerpt -->
+                            <p v-html="$options.filters.truncate_data(article.node.description, 190)"></p>
+                            <!-- Reading More -->
+                            <div class="post-continue-reading-share mt-30">
+                                <div class="post-continue-btn">
+                                    <a :href="'/detail/' + article.node.slug + '/'" class="font-pt">Lire Plus <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     
                 </div>
             </div>
         </section>
     </main>
+    
 {% endblock content %}
 
 
@@ -75,6 +75,9 @@
             data:{
                 categorie_article: [],
                 loading: true,
+                cursor_article: null,
+                loading_is_stared: false,
+                nbr :6
             },
             delimiters: ['%{', '}'],
             directives: {},
@@ -87,6 +90,7 @@
                 },
             },
             mounted(){
+
                 axios.post("https://nannews.herokuapp.com/graphql", {
                     query:`{
                         relayCategories(slug_Iexact:"{{slug}}"){
@@ -95,7 +99,8 @@
                                 node{
                                     id
                                     name
-                                    categoryArticle{
+                                    categoryArticle(first:6){
+                                        
                                         edges{
                                             cursor
                                             node{
@@ -124,16 +129,74 @@
                 }
                 ).then((response)=>{
                     let temp = response.data.data.relayCategories.edges[0].node
-                    console.log(temp)
+                    this.cursor_article = response.data.data.relayCategories.edges[0].node.categoryArticle.edges[this.nbr-1].cursor
                     this.categorie_article = temp.categoryArticle?.edges
                     console.log(this.categorie_article)
+                    console.log(this.categorie_article)
                 }).finally(()=> this.loading = false)
+
+                const listElm = document.querySelector('#categorie_ART');
+                listElm.addEventListener('scroll', e => {
+                    if(listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight){
+                        this.loadMore();
+                      }
+                    });
+
+                    //this.loadMore();
             },
             methods:{
-
+                loadMore (){
+                        if (!this.loading_is_stared){
+                            this.loading_is_stared = true
+                            axios.post("https://nannews.herokuapp.com/graphql", {
+                                query:`{
+                                    relayCategories(slug_Iexact:"{{slug}}"){
+                                        edges{
+                                            cursor
+                                            node{
+                                                id
+                                                name
+                                                categoryArticle(first:${this.nbr},after:"${this.cursor_article}"){
+                                                    edges{
+                                                        cursor
+                                                        node{
+                                                            id
+                                                            slug
+                                                            title
+                                                            picture
+                                                            description
+                                                            datePublication
+                                                            category{
+                                                                id
+                                                                name
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }`
+                            }, 
+                            {
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            }
+                            ).then((response)=>{
+                                this.loading_is_stared = false
+                                let temp = response.data.data.relayCategories.edges[0].node
+                                this.cursor_article = response.data.data.relayCategories.edges[0].node.categoryArticle.edges[this.nbr-1].cursor
+                                console.log(this.cursor_article)
+                                this.categorie_article = this.categorie_article.concat(temp.categoryArticle?.edges)
+                            })
+                        }
+                    
+                }
             }
         })
 
     </script>
+    
 
 {% endblock allCategorie %}
