@@ -4,7 +4,7 @@
 {% block content %}
 
     <!-- Breadcumb Area Start -->
-    <main id="categorie_ART">
+    <main id="categorie_ART"  style="height: 1000px; overflow:auto;">
         <div class="breadcumb-area section_padding_50">
             <div class="container">
                 <div class="row">
@@ -29,6 +29,9 @@
         <section class="catagory-welcome-post-area section_padding_100">
             <div  class="container"> 
                 <div id="content" class="row" style="height: 1000px; overflow: auto;" >
+        <section  class="catagory-welcome-post-area section_padding_100" >
+            <div  class="container"> 
+                <div  class="row"  >
 
                     <div v-if="loading" class='modal-loader'>
                         <div  v-if="loading" class="lds-ripple"><div></div><div></div></div>
@@ -136,6 +139,7 @@
                 }).finally(()=> this.loading = false)
 
                 const listElm = document.querySelector('#content');
+                const listElm = document.querySelector('#categorie_ART');
                 listElm.addEventListener('scroll', e => {
                     if(listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight){
                         this.loadMore();
@@ -158,6 +162,7 @@
                                                 name
                                                 categoryArticle(first:${this.nbr},after:"this.cursor_article"){
                                                     
+                                                categoryArticle(first:${this.nbr},after:"${this.cursor_article}"){
                                                     edges{
                                                         cursor
                                                         node{
@@ -192,6 +197,7 @@
                                 this.categorie_article.concat(temp.categoryArticle?.edges)
                                 console.log(temp.categoryArticle?.edges)
                                 console.log("")
+                                this.categorie_article = this.categorie_article.concat(temp.categoryArticle?.edges)
                             })
                         }
                     
