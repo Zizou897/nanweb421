@@ -40,26 +40,62 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <!-- <div class="row">
+                    <div class="owl-carousel owl-theme">
+
                     
-                    {% for team in teams %}
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="single-team-area">
-                                <img src="{{team.image.url}}" alt="">
-                                <div class="team-member-data">
-                                    <h4 class="font-pt">{{team.nom}} {{team.prenom}}</h4>
-                                    <div class="team-member-designation-social-info d-flex align-items-cente justify-content-between">
-                                        <h5 class="font-pt mb-0">{{team.job}}</h5>
-                                        <div class="social-info">
-                                            {% for social in team.team_social.all %}
-                                                <a href="#"><i class="{{ social.icon }}"></i></a>
-                                            {% endfor %}
+                        {% for team in teams %}
+                            <div class="item">
+                                <div class="single-team-area">
+                                    <img src="{{team.image.url}}" alt="">
+                                    <div class="team-member-data">
+                                        <h4 class="font-pt">{{team.nom}} {{team.prenom}}</h4>
+                                        <div class="team-member-designation-social-info d-flex align-items-center justify-content-between">
+                                            <h5 class="font-pt mb-0">{{team.job}}</h5>
+                                            <div class="social-info">
+                                                {% for social in team.team_social.all %}
+                                                    <a href="#"><i class="{{ social.icon }}"></i></a>
+                                                {% endfor %}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div> -->
+
+                <div class="row">
+                    <div class="col-md-12 py-2">
+                            <div class="owl-carousel owl-theme">
+
+                                <div class="item">
+                                    <div class="card" style="width: 80%;">
+                                        <img class="card-img-top" src={% static 'assets/css/images/person_1.jpg' %} alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title">John Doe</h5>
+                                            <p class="card-text">Web developer</p>
+                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="card" style="width: 80%;">
+                                        <img class="card-img-top" src={% static 'assets/css/images/person_3.jpg' %} alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title">John Doe</h5>
+                                            <p class="card-text">Web developer</p>
+                                            <div class="team-social-network">
+                                                <a href="#"><i class="fab fa-facebook-square"></i></a>
+                                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                                <a href="#"><i class="fab fa-twitter-square"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
                 </div>
             </div>
         </div>

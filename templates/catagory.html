@@ -26,6 +26,9 @@
 
     <!-- Editorial Area End -->
 
+        <section class="catagory-welcome-post-area section_padding_100">
+            <div  class="container"> 
+                <div id="content" class="row" style="height: 1000px; overflow: auto;" >
         <section  class="catagory-welcome-post-area section_padding_100" >
             <div  class="container"> 
                 <div  class="row"  >
@@ -135,6 +138,7 @@
                     console.log(this.categorie_article)
                 }).finally(()=> this.loading = false)
 
+                const listElm = document.querySelector('#content');
                 const listElm = document.querySelector('#categorie_ART');
                 listElm.addEventListener('scroll', e => {
                     if(listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight){
@@ -156,6 +160,8 @@
                                             node{
                                                 id
                                                 name
+                                                categoryArticle(first:${this.nbr},after:"this.cursor_article"){
+                                                    
                                                 categoryArticle(first:${this.nbr},after:"${this.cursor_article}"){
                                                     edges{
                                                         cursor
@@ -188,6 +194,9 @@
                                 let temp = response.data.data.relayCategories.edges[0].node
                                 this.cursor_article = response.data.data.relayCategories.edges[0].node.categoryArticle.edges[this.nbr-1].cursor
                                 console.log(this.cursor_article)
+                                this.categorie_article.concat(temp.categoryArticle?.edges)
+                                console.log(temp.categoryArticle?.edges)
+                                console.log("")
                                 this.categorie_article = this.categorie_article.concat(temp.categoryArticle?.edges)
                             })
                         }
