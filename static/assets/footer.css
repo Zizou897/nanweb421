@@ -1,0 +1,80 @@
+/*-- footer /*********************************************/
+.footer-block {
+    width: 80%;
+    margin: auto;
+    color: #fff;
+    min-height: 300px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    
+  }
+  
+  .footer-block h5,
+  .sous-menu_title {
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-family: 'PT Serif', serif !important;
+    color: #fff;
+  }
+  
+  .footer-block ul li.mg {
+    margin-bottom: 8px;
+    
+  }
+
+  .mg{
+    font-family: 'PT Serif', serif;
+  }
+  
+  .footer-block ul li a,
+  .footer-block_group1 {
+    color: #939fb6a8;
+    transition: 0.4s ease;
+    font-family: 'PT Serif', serif;
+  }
+  
+  .footer-block_group1 .white {
+    color: #fff;
+  }
+  
+  .footer-block ul li a:hover {
+    color: #eceef1;
+    transition: 0.4s ease;
+  }
+  
+  .foot-social_media li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .foot-social_media li a ion-icon {
+    font-size: 22px;
+    /* background: #96a2b8;
+      color:#182f59; */
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .foot-social_media li a ion-icon:hover {
+    color: #ddd;
+  }
+  
+  .horizontal-bar {
+    background: #7780ffa6;
+    height: 2px;
+    width: 30%;
+    border-radius: 20px;
+  }
+  
+  .conception a {
+    color: hsl(205, 66%, 94%);
+    font-size: 15px;
+    transition: 0.2s ease;
+  }
+  
+  .conception a:hover {
+    color: #179bd7;
+    transition: 0.2s ease;
+  }
