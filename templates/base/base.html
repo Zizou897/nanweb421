@@ -156,12 +156,11 @@
                             <h5>nous suivre:</h5>
                             <hr class="horizontal-bar">
                             <ul class="foot-social_media">
-                                
-                                <li><a href="#" class="social"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="social"><i class="fa fa-youtube-play"></i></ion-icon></a></li>
-                                <li><a href="#" class="social"><i class="fa fa-linkedin-square"></i></a></li>
-                                <li><a href="#" class="social"><i class="fa fa-twitter-square"></i></a></li>
-                                <li><a href="#" class="social"><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="#" class="social"><i class="fab fa-facebook"></i></a></li>
+                                <li><a href="#" class="social"><i class="fab fa-youtube"></i></a></li>
+                                <li><a href="#" class="social"><i class="fab fa-linkedin-square"></i></a></li>
+                                <li><a href="#" class="social"><i class="fab fa-twitter-square"></i></a></li>
+                                <li><a href="#" class="social"><i class="fab fa-instagram"></i></a></li>
                             </ul>
                         </div>
                         
@@ -172,7 +171,7 @@
                 <hr style="background:#858BE9">
             </div>
             <div class="col-md-12 text-center">
-                <p style="color:#939fb6a8">NaN- officiel</p>
+                <p style="color:#939fb6a8">NaN News</p>
                 
             </div>
             </footer>
@@ -205,7 +204,7 @@
     <script  src="{% static 'assets/js/script.js' %}"></script>
     <script src={% static 'assets/owlcarousel/js/owl.carousel.min.js' %}></script>
     <script src={% static 'assets/js/main.js' %}></script>
-
+{% comment %} 
     <script>
 let compteur = 0;
 let slideCompt = 0;
@@ -231,7 +230,7 @@ function slideNext() {
 }
 
 const calc = (data) => {
-    return `<div  class="section-block element"  :style="{backgroundImage: url(${data.url}',  backgroundRepeat: call, backgroundSize: cover, backgroundPosition:place, width: percent, overflow: overflow, filter: filtre, }">
+    return '<div  class="section-block element"  :style="{backgroundImage: url(${data.url}",  backgroundRepeat: call, backgroundSize: cover, backgroundPosition:place, width: percent, overflow: overflow, filter: filtre, }">
                     <!-- Single Blog Post Content -->
                     <div class="title-section">
                         <div class="tags">
@@ -242,10 +241,10 @@ const calc = (data) => {
                             <a href="#">%{art.datePublication}</a>
                         </div>
                     </div>
-                </div> `
+                </div> '
 }
 
-    </script>
+    </script> {% endcomment %}
 
     {% block scripts %}
         

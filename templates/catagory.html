@@ -139,7 +139,6 @@
                 }).finally(()=> this.loading = false)
 
                 const listElm = document.querySelector('#content');
-                const listElm = document.querySelector('#categorie_ART');
                 listElm.addEventListener('scroll', e => {
                     if(listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight){
                         this.loadMore();
@@ -160,8 +159,6 @@
                                             node{
                                                 id
                                                 name
-                                                categoryArticle(first:${this.nbr},after:"this.cursor_article"){
-                                                    
                                                 categoryArticle(first:${this.nbr},after:"${this.cursor_article}"){
                                                     edges{
                                                         cursor
