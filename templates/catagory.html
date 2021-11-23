@@ -28,15 +28,45 @@
 
         <section class="catagory-welcome-post-area section_padding_100">
             <div  class="container"> 
-                <div id="content" class="row" style="height: 1000px; overflow: auto;" >
+                <div id="content" class="row" style="height: 1000px ; overflow: auto;" >
         <section  class="catagory-welcome-post-area section_padding_100" >
             <div  class="container"> 
                 <div  class="row"  >
 
-                    <div v-if="loading" class='modal-loader'>
-                        <div  v-if="loading" class="lds-ripple"><div></div><div></div></div>
+                    <div v-if= "loading" class='modal-loader'>
+                        <div class="card-row">
+                            <div v-for="number in 6" class="card ">
+                                <h1 class="heading loading"></h1>
+                                <h2 class="heading loading"></h2>
+                                <h2 class="heading loading"></h2>
+
+                                <div class="card_img loading"></div>
+                                <div class="card_text">
+                                    <h2 class=" loading description"></h2>
+                                    <h2 class=" loading description"></h2>
+                                    <h2 class=" loading description"></h2>
+                                </div>
+                                <h1 class="heading loading"></h1>
+                            </div>
+                        </div>
                     </div>
-                    
+                    <div v-if= "loading_is_stared" class='modal-loader'>
+                        <div class="card-row">
+                            <div v-for="number in 3" class="card ">
+                                <h1 class="heading loading"></h1>
+                                <h2 class="heading loading"></h2>
+                                <h2 class="heading loading"></h2>
+
+                                <div class="card_img loading"></div>
+                                <div class="card_text">
+                                    <h2 class=" loading description"></h2>
+                                    <h2 class=" loading description"></h2>
+                                    <h2 class=" loading description"></h2>
+                                </div>
+                                <h1 class="heading loading"></h1>
+                            </div>
+                        </div>
+                    </div>
                     <div  v-else v-for="article in categorie_article" class="col-12 col-md-4">
                         <!-- Gazette Welcome Post -->
                         <div class="gazette-welcome-post">
@@ -60,7 +90,6 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </section>
@@ -77,6 +106,7 @@
             el: "#categorie_ART",
             data:{
                 categorie_article: [],
+                number: 1,
                 loading: true,
                 cursor_article: null,
                 loading_is_stared: false,
