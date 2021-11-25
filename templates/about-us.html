@@ -68,31 +68,33 @@
                 <div class="row">
                     <div class="col-md-12 py-2">
                             <div class="owl-carousel owl-theme">
-
+                                {% for team in teams %}
                                 <div class="item">
                                     <div class="card" style="width: 80%;">
-                                        <img class="card-img-top" src={% static 'assets/css/images/person_1.jpg' %} alt="Card image cap">
+                                        <img class="card-img-top" src={{team.image.url}} alt="Card image cap">
                                         <div class="card-body">
-                                            <h5 class="card-title">John Doe</h5>
-                                            <p class="card-text">Web developer</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                            <h5 class="card-title">{{team.nom}} {{team.prenom}}</h5>
+                                            <p class="card-text">{{team.job}}</p>
+                                            <div class="team-social-network">
+                                                {% for social in team.team_social_user.all %}
+                                                <a href={{social.link}}><i class="{{social.social.icon}}"></i></a>
+                                                {% endfor %}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                {% endfor %}
+                                <!--
                                 <div class="item">
                                     <div class="card" style="width: 80%;">
                                         <img class="card-img-top" src={% static 'assets/css/images/person_3.jpg' %} alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">John Doe</h5>
                                             <p class="card-text">Web developer</p>
-                                            <div class="team-social-network">
-                                                <a href="#"><i class="fab fa-facebook-square"></i></a>
-                                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                                                <a href="#"><i class="fab fa-twitter-square"></i></a>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                -->
                             </div>
 
                     </div>

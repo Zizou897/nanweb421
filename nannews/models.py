@@ -97,7 +97,7 @@ class SocialUser(Base):
         "nannews.Social",related_name="team_social", on_delete=models.CASCADE
     )
     team = models.ForeignKey(
-        "nannews.Team", related_name="team_social", on_delete=models.CASCADE
+        "nannews.Team", related_name="team_social_user", on_delete=models.CASCADE
     )
 
     class Meta:
