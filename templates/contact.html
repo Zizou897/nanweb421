@@ -24,32 +24,32 @@
             <div class="row">
                 <div class="col-12 col-md-8">
                     <div class="gazette-heading">
-                        <h4 class="font-bold">address</h4>
+                        <h4 class="font-bold">adresse</h4>
                     </div>
                     <!-- Contact Form --> 
                     <form id="contact" action="#" method="post">
                     {% csrf_token %}
                         <div class="form-group">
-                            <input type="text" class="form-control" name="name"  id="contact-name" v-model='name' placeholder="Enter Your Full Name">
+                            <input type="text" class="form-control" name="name"  id="contact-name" v-model='name' placeholder="Entrer votre nom complet">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" name="email"  id="contact-email" v-model='email' placeholder="Email">
+                            <input type="email" class="form-control" name="email"  id="contact-email" v-model='email' placeholder="E-mail">
                         </div>
                         <div class="form-group">
                             <textarea class="form-control" name="message" id="message" v-model='message'cols="30" rows="10" placeholder="Message"></textarea>
                         </div>
-                        <button type="submit"  @click.prevent="postData" class="btn contact-btn">SUBMIT <i class="fa fa-angle-right ml-2"></i></button>
+                        <button type="submit"  @click.prevent="postData" class="btn contact-btn">NOUS FAIRE PARVENIR <i class="fa fa-angle-right ml-2"></i></button>
                     </form>
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="gazette-heading">
-                        <h4 class="font-bold">address</h4>
+                        <h4 class="font-bold">adresse</h4>
                     </div>
                     <div class="contact-address-info mb-50">
-                        <p>Address: {{site_web.address}} <br> City / State: Montgomery, AL 36104 </p>
+                        <p>Adresse: {{site_web.address}} <br> Cocody / Angrey : Gestoci </p>
                     </div>
                     <div class="gazette-heading">
-                        <h4 class="font-bold">Phone</h4>
+                        <h4 class="font-bold">Téléphone</h4>
                     </div>
                     <div class="contact-address-info">
                         {% for phone in site_web.site_phone.all%}
