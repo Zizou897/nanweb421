@@ -75,7 +75,7 @@ def checkup(request):
                     name,
                     message,
                     email,
-                    ['azeridwan10@gmail.com'], 
+                    ['amiroudiallo03@gmail.com'], 
                     fail_silently=False,
                 )
             else:
